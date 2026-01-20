@@ -1,0 +1,89 @@
+.all-submission-page {
+  padding: 20px;
+  max-width: 1100px;
+  margin: auto;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+.all-submission-title {
+  text-align: center;
+  font-size: 26px;
+  margin-bottom: 25px;
+  color: #222;
+}
+
+
+.submission-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 18px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease;
+}
+
+.submission-card:hover {
+  transform: translateY(-3px);
+}
+
+
+.submission-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.submission-description {
+  font-size: 15px;
+  color: #555;
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+
+.submission-code {
+  background-color: #0f172a;
+  color: #e5e7eb;
+  padding: 15px;
+  border-radius: 8px;
+  font-family: Consolas, monospace;
+  font-size: 14px;
+  white-space: pre-wrap;
+  overflow-x: auto;
+}
+
+
+@media (max-width: 768px) {
+  .all-submission-page {
+    padding: 12px;
+  }
+
+  .all-submission-title {
+    font-size: 22px;
+  }
+
+  .submission-title {
+    font-size: 18px;
+  }
+
+  .submission-description {
+    font-size: 14px;
+  }
+
+  .submission-code {
+    font-size: 13px;
+  }
+}
+
+
+@media (max-width: 480px) {
+  .submission-card {
+    padding: 14px;
+  }
+
+  .submission-code {
+    padding: 12px;
+  }
+}

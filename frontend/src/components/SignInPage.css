@@ -1,0 +1,99 @@
+.signin-page {
+  min-height: 100vh;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: "Segoe UI", Arial, sans-serif;
+  padding: 20px;
+}
+
+.signin-page h1 {
+  margin-bottom: 20px;
+  color: #00ff7f;
+  font-size: 28px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.signin-page form {
+  width: 100%;
+  max-width: 360px;
+  background-color: #0e0e0e;
+  padding: 28px;
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 0 25px rgba(0, 255, 127, 0.25);
+  box-sizing: border-box;
+}
+
+.signin-page input {
+  width: 100%;
+  padding: 11px 12px;
+  background-color: #000;
+  border: 1px solid #2a2a2a;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 15px;
+  outline: none;
+  box-sizing: border-box;
+  transition: 0.25s;
+}
+
+.signin-page input::placeholder {
+  color: #888;
+}
+
+.signin-page input:focus {
+  border-color: #00ff7f;
+  box-shadow: 0 0 6px rgba(0, 255, 127, 0.7);
+}
+
+.signin-page button {
+  margin-top: 6px;
+  padding: 11px;
+  background-color: #00ff7f;
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.signin-page button:hover {
+  background-color: #00cc66;
+  box-shadow: 0 0 12px rgba(0, 255, 127, 0.8);
+}
+
+.signup-link {
+  margin-top: 14px;
+  font-size: 14px;
+  text-align: center;
+  color: #aaa;
+}
+
+.signup-link a {
+  color: #00ff7f;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signup-link a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .signin-page h1 {
+    font-size: 22px;
+  }
+
+  .signin-page form {
+    padding: 22px;
+  }
+}
