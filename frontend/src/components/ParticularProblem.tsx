@@ -30,7 +30,7 @@ setResult(response.data);
             const error= err as AxiosError<{message:string}>
             if(error.response?.data?.message=== 'provide proper detail'){
                 alert('provide proper detail');
-            }else if(error.response?.data?.message=== 'not found'){
+            }else if(error.response?.data?.message=== 'admin has not completely make the question and added does not hidden test case for it'){
                 alert('admin has not yet add test cases');
             }
         }finally{
@@ -74,8 +74,8 @@ setResult(response.data);
         <select value={language} onChange={(e)=>setLanguage(e.target.value)}>
             <option value="Select Langauge">Select Language</option>
             <option value="C++">C++</option>
-            <option value="java">java</option>
-            <option value="python">python</option>
+            <option value="java">Java</option>
+            <option value="python">Python</option>
         </select>
      </div>
      </div>
