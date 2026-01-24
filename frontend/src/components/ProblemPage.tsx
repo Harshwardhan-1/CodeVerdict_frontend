@@ -17,6 +17,7 @@ export default function ProblemPage(){
         topic:string,
     }
     const [data,setData]=useState<Question[]>([]);
+    const [search,setSearch]=useState<string>('');
     useEffect(()=>{
         const fetch=async()=>{
             try{
@@ -59,10 +60,17 @@ if(response.data.message=== 'all question'){
 
 
          <h2>List Of Problems</h2>
-         
+
+
+
+        <input className='seacrh-box' type="text" placeholder='Search by problem name/title' value={search} onChange={(e)=>setSearch(e.target.value)}/>
+
     <div className="problem-list">
         {
-            data.map((all,index)=>(
+            data.filter((item)=>
+             item.title.toLowerCase().includes(search.toLowerCase())
+            )
+            .map((all,index)=>(
                 <div  className="problem-card" key={index}>
                     <span className="problem-number"> {index + 1}.</span>
                     <button onClick={()=>handleTitle(all)}>{all?.title}</button>
