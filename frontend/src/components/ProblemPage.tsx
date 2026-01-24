@@ -63,7 +63,7 @@ if(response.data.message=== 'all question'){
 
 
 
-        <input className='seacrh-box' type="text" placeholder='Search by problem name/title' value={search} onChange={(e)=>setSearch(e.target.value)}/>
+        <input className='search-box' type="text" placeholder='Search by problem name/title' value={search} onChange={(e)=>setSearch(e.target.value)}/>
 
     <div className="problem-list">
         {
