@@ -1,73 +1,125 @@
-# React + TypeScript + Vite
+#  Code Verdict – Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the frontend application of Code Verdict, a full-stack coding practice platform inspired by modern online judges.  
+It provides a clean, responsive, and interactive interface for solving problems and tracking progress.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+##  Features
 
-## React Compiler
+- 🔐 User Authentication (Signup / Login)
+- 📋 Problem Listing with Detailed View
+- 💻 Code Editor Interface
+- 📊 Heatmap Progress Tracking
+- 🏆 Contest Participation UI
+- 📱 Fully Responsive Design
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠 Tech Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React
+- TypeScript
+- Vite
+- CSS
+- Axios
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+---
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+##  Project Structure
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+client/
+│
+├── src/
+│   ├── components/
+│   ├── pages/
+│   ├── hooks/
+│   ├── services/
+│   ├── assets/
+│   └── App.tsx
+│
+├── public/
+├── package.json
+├── vite.config.ts
+└── README.md
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Installation & Setup
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### 1 Clone the Repository
+git clone https://github.com/Harshwardhan-1/codeVerdict.git
+cd codeVerdict
+
+### 2 Install Dependencies
+
 ```
+npm install
+```
+
+###  Run Development Server
+
+```
+cd client
+npm run dev
+```
+
+The app will run at:
+
+```
+http://localhost:5173
+```
+
+---
+
+##  Environment Variables
+
+Create a `.env` file inside the `client` folder and add:
+
+```
+VITE_BACKEND_URL=your_backend_url
+```
+
+Replace the value with your backend server URL.
+
+---
+
+##  Production Build
+
+To create a production build:
+
+```
+npm run build
+```
+
+To preview the production build:
+
+```
+npm run preview
+```
+
+---
+
+##  Deployment
+
+The frontend is optimized for deployment on platforms like:
+
+- Vercel
+- Netlify
+- Any static hosting service
+
+---
+
+##  Notes
+
+- Ensure backend server is running before starting the frontend.
+- Make sure the backend URL is correctly configured in environment variables.
+
+---
+
+##  Author
+Harshwardhan Yadav
+Full Stac Devloper
+Frontend developed as part of the Code Verdict full-stack project.

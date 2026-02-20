@@ -91,8 +91,8 @@ code-verdict/
 ### 1 Clone the Repository
 
 ```
-git clone https://github.com/JayRathore10/leetcode-clone.git
-cd leetcode-clone
+git clone https://github.com/Harshwardhan-1/codeVerdict.git
+cd codeVerdict
 ```
 
 ### 2️ Install Dependencies
