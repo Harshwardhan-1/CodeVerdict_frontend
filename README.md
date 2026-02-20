@@ -1,4 +1,4 @@
-## 📸 Screenshots
+##  Screenshots
 
 ### Profile Page
 ![Profile Page](assets/profilePage.png)
@@ -33,84 +33,134 @@
 
 
 
-Overview
-This project replicates the core functionality of an online coding judge. Users can browse problems, write solutions in an integrated code editor, and execute their code to verify correctness. The platform is designed with clean architecture, scalability, and maintainability in mind.
 
-Features
-Structured problem listing and detailed problem pages
-Integrated code editor with syntax highlighting
-Code execution and output evaluation
-User authentication and session management
-RESTful API architecture
-Responsive user interface
-Tech Stack
+
+
+
+
+
+
+Project Overview
+
+Code Verdict simulates the essential workflow of an online coding judge. Users can explore coding problems, write and test solutions, and participate in structured contests. The system is developed with scalability, modular architecture, and maintainability as key design principles.
+
+✨ Core Features
+
+Organized problem listing with detailed descriptions
+
+Contest participation system
+
+Secure user authentication and session handling
+
+Admin dashboard for managing questions and contests
+
+REST-based backend architecture
+
+Clean and responsive UI design
+
+🛠 Technology Stack
 Frontend
+
 React
+
 TypeScript
+
 CSS
+
 Backend
+
 Node.js
-Express
+
+Express.js
+
+MongoDB
+
 Additional Tools
+
+JWT Authentication
+
 REST APIs
-Online code execution service integration
-Vercel (Frontend deployment)
-Project Structure
-leetcode-clone/
+
+Vercel (Frontend Deployment)
+
+📂 Project Structure
+code-verdict/
 │
-├── client/                  
-├── server/                  
+├── client/                
+├── server/                
 ├── assets/
 │   ├── screenshots/
-│   └── videos/
+│   └── media/
 └── README.md
-Installation and Setup
-1. Clone the Repository
-git clone https://github.com/JayRathore10/leetcode-clone.git
-cd leetcode-clone
-2. Install Dependencies
+⚙️ Installation & Setup
+1️⃣ Clone the Repository
+git clone https://github.com/your-username/code-verdict.git
+cd code-verdict
+2️⃣ Install Dependencies
+
+Frontend:
+
 cd client
 npm install
 
-cd ../server
+Backend:
+
+cd server
 npm install
-3. Configure Environment Variables
+3️⃣ Environment Configuration
+
 Create a .env file inside the server directory and configure:
 
 PORT=5000
 MONGO_URI=your_database_connection_string
-GEMINI_API_KEY=your_gemini_api_service_key
-COOKIE_SECRET=your_cookie_secret
-SALT_ROUND=your_hashing_salt_round
 JWT_SECRET=your_jwt_secret
-FRONTEND=your_frontend_url
-VITE_BACKEND_URL=your_backend_url
-Modify values according to your environment configuration.
+COOKIE_SECRET=your_cookie_secret
+SALT_ROUNDS=your_hashing_salt_round
+FRONTEND_URL=your_frontend_url
 
-4. Run the Application
+Adjust values according to your setup.
+
+4️⃣ Run the Application
+
 Start backend:
 
 cd server
 npm run dev
+
 Start frontend:
 
 cd client
 npm start
-Deployment
-Frontend deployed on Vercel
-Backend can be deployed on Render, Railway, or any Node.js-supported hosting platform
-Future Improvements
+🚀 Deployment
+
+Frontend hosted on Vercel
+
+Backend can be deployed on Render, Railway, or any Node.js hosting service
+
+🔮 Planned Enhancements
+
+Leaderboard integration
+
 Submission history tracking
-User performance statistics dashboard
-Difficulty filters and tagging system
-Discussion section per problem
-Admin panel for managing problems
-Contributing
-Contributions are welcome.
+
+Advanced filtering by difficulty and topic
+
+Performance analytics dashboard
+
+Discussion section for problems
+
+🤝 Contribution Guidelines
+
+Contributions are welcome:
 
 Fork the repository
-Create a feature branch
-Commit your changes
-Open a pull request with a clear description
-License
-This project is open-source and intended for educational and portfolio purposes.
+
+Create a new branch
+
+Implement your feature or fix
+
+Submit a pull request with a clear explanation
+
+📄 License
+
+This project is open-source and available for educational and development purposes.
