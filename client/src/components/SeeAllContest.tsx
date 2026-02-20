@@ -3,6 +3,7 @@ import {useEffect} from 'react';
 import axios from 'axios';
 import { AxiosError } from 'axios';
 import { Link } from 'react-router-dom';
+import './SeeAllContest.css';
 export default function SeeAllContest(){
     interface contest{
         _id:string,
@@ -53,21 +54,22 @@ export default function SeeAllContest(){
 
     return(
         <>
+
+    <div className="see-contest-wrapper">
         <h1>This are the list of all your contest</h1>
         {
             data.map((all,index)=>(
-                <div key={index}>
-                    <p>{all?._id}</p>
-                    <p>{all?.name}</p>
-                    <p>{all?.gmail}</p>
-                    <p>{all?.instructions}</p>
-                    <p>{new Date(all?.organizingDate).toLocaleDateString()}</p>
-                    <p>{new Date(all?.startingTimeOfContest).toLocaleTimeString("en-IN",{
+                <div className="contest-card" key={index}>
+                   <p>Name:{all?.name}</p>
+                    <p>Gmail:{all?.gmail}</p>
+                    <p>Instruction:{all?.instructions}</p>
+                    <p>Organizing Date:{new Date(all?.organizingDate).toLocaleDateString()}</p>
+                    <p>Starting time of Contest:{new Date(all?.startingTimeOfContest).toLocaleTimeString("en-IN",{
                         hour:"2-digit",
                         minute:"2-digit",
                         hour12:true
                     })}</p>
-                    <p>{new Date(all?.endingTimeOfContest).toLocaleTimeString("en-IN",{
+                    <p>Ending Time Of Contest:{new Date(all?.endingTimeOfContest).toLocaleTimeString("en-IN",{
                         hour:"2-digit",
                         minute:"2-digit",
                         hour12:true,
@@ -82,6 +84,7 @@ export default function SeeAllContest(){
                 </div>
             ))
         }
+        </div>
         </>
     );
 }

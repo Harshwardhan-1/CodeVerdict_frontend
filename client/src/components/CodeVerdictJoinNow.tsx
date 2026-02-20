@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios, { AxiosError } from "axios";
+import './CodeVerdictJoinNow.css';
 
 interface Contest {
   _id: string;
@@ -146,45 +147,37 @@ const showLeaderBoard=async(e:React.MouseEvent<HTMLButtonElement>)=>{
 
   return (
     <>
-      <h1>CodeVerdict Contest Live</h1>
+      <div className="codeverdict-join-wrapper">
+  <div className="contest-info-card">
+    <h2>Contest Info</h2>
+        <p><b>Name:</b> {data.name}</p>
+    <p><b>Organizer:</b> {data.gmail}</p>
+    <p><b>Instructions:</b> {data.instructions}</p>
+    <p><b>Date:</b> {new Date(data.organizingDate).toLocaleDateString()}</p>
+    <p><b>Start:</b> {new Date(data.startingTimeOfContest).toLocaleTimeString()}</p>
+    <p><b>End:</b> {new Date(data.endingTimeOfContest).toLocaleTimeString()}</p>
+  </div>
 
-      <p><b>Contest ID:</b> {data._id}</p>
-      <p><b>Name:</b> {data.name}</p>
-      <p><b>Organizer:</b> {data.gmail}</p>
-      <p><b>Instructions:</b> {data.instructions}</p>
+  <button onClick={showQuestions}>See All Questions</button>
+  <button onClick={showLeaderBoard}>LeaderBoard</button>
 
-      <p> <b>Date:</b>{" "}{new Date(data.organizingDate).toLocaleDateString()}</p>
-      <p><b>Start:</b>{" "}{new Date(data.startingTimeOfContest).toLocaleTimeString()}</p>
-      <p><b>End:</b>{" "}{new Date(data.endingTimeOfContest).toLocaleTimeString()}</p>
-      <h3>Questions</h3>      
-         <button onClick={showQuestions}>See All Questions</button>
-         <button onClick={showLeaderBoard}>LeaderBoard</button>
+  {contestQuestion.map((q, i) => (
+    <div className="problem-card" key={i}>
+      <span className="problem-number">{i+1}.</span>
+      <button onClick={() => handleTitle(q)}>{q.title}</button>
+      <span>Difficulty: {q.difficulty}</span>
+    </div>
+  ))}
 
-
-         
-        {
-            contestQuestion.map((all,index)=>(
-                <div  className="problem-card" key={index}>
-                    <span className="problem-number"> {index + 1}.</span>
-                    <button  onClick={()=>handleTitle(all)}>{all?.title}</button>
-                    <p>{all?._id}</p>
-                    <span>{all.difficulty}</span>
-                </div>
-            ))
-        }
-
-
-
-          {
-            showLeaderBoardResult.map((all,index)=>(
-                <div key={index}>
-                    <p>Rank:{index+1}</p>
-                    <p>Name:{all?.name}</p>
-                    <p>Gmail:{all?.gmail}</p>
-                    <p>Points:{all?.points}</p>
-                </div>
-            ))
-        }
+  {showLeaderBoardResult.map((entry, i) => (
+    <div className="leaderboard-card" key={i}>
+      <p><b>Rank:</b> {i+1}</p>
+      <p><b>Name:</b> {entry.name}</p>
+      <p><b>Email:</b> {entry.gmail}</p>
+      <p><b>Points:</b> {entry.points}</p>
+    </div>
+  ))}
+</div>
     </>
   );
 }

@@ -5,7 +5,7 @@ import { useEffect } from "react";
 import { AxiosError } from "axios";
 import './ParticularProblem.css';
 import { useNavigate } from "react-router-dom";
-import MonacoEditor from "@monaco-editor/react";
+import {Editor} from "@monaco-editor/react";
 import { io } from "socket.io-client";
 export default function ParticularProblem(){
   const navigate=useNavigate();
@@ -249,23 +249,24 @@ setLoading(false);
       <div className="pp-right">
         <p>Write your code here for problem {harsh?.title}</p>
 
-<MonacoEditor
-  height="400px"
-  width="100%"
-  language={language.toLowerCase()}
-  // theme="hc-black"
-  theme="vs-dark"
-  value={userCode}
-  onChange={(value) => setUserCode(value || '')}
-  options={{
-    automaticLayout: true,
-    fontSize: 16,
-    minimap: { enabled: false },
-    scrollBeyondLastLine: false,
-  }}
-/>            <div className="pp-buttons">
+   <Editor
+        height="400px"
+        width="100%"
+        language={language || "cpp"}
+        theme="vs-dark"
+        value={userCode}
+        onChange={(value) => setUserCode(value || "")}
+        options={{
+          fontSize: 16,         
+          fontFamily: "Fira Code, monospace",
+          lineHeight: 22,
+          minimap: { enabled: false },
+          wordWrap: "on",
+          automaticLayout: true
+        }}
+      />       
 
-
+  <div className="pp-buttons">
           <button onClick={handleRun} className="pp-run-btn">Run</button>
           <button onClick={handleSubmit} className="pp-submit-btn">Submit</button>
           <button onClick={discussSolution} className="pp-submit-btn">Discuss Solution</button>

@@ -43,17 +43,22 @@ export default function SignInPage(){
     }
     return(
         <>
+        <div className='signin-page-wrapper'>
         <div className="signin-page">
-        <h1>Welcone To login Page</h1>
+        <h1>Welcome Back</h1>
+        <p>Enter your details to access your account</p>
         <form onSubmit={handle}>
+            <label>Email</label>
           <input type="email" placeholder='Enter your email here' value={gmail} onChange={(e)=>setGmail(e.target.value)}/>
+          <label>Password</label>
           <input type="password" placeholder='Enter your password here' value={password} onChange={(e)=>setPassword(e.target.value)} />
-              <button type='submit'>Submit</button>
+              <button type='submit'>Login</button>
               <div className="signup-link">
           Don't have an account?{" "}
-          <Link to="/">Create account</Link>
+          <Link to="/">SignUp</Link>
         </div>
             </form> 
+        </div>
         </div>
         </>
     );

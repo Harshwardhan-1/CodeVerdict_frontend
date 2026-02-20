@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import './ContestPage.css'
 import { AxiosError } from "axios";
 export default function ContestPage(){
     const navigate=useNavigate();
@@ -29,10 +30,15 @@ export default function ContestPage(){
     }
     return(
         <>
-        <h1>Contest page</h1>
-        <button type="button" onClick={handleVerdictContest}>CodeVerdict Contest</button>
-        <button onClick={handle}>Organize your own contest</button>
-        <button onClick={seeContest}>See All Your Contest</button>
+        <div className="contest-page-wrapper">
+      <div className="contest-page">
+        <h1>Contest Page</h1>
+        <button onClick={handleVerdictContest}>CodeVerdict Contest</button>
+        <button onClick={handle}>Organize Your Own Contest</button>
+        <button onClick={seeContest}>See All Your Contests</button>
+      </div>
+    </div>
+
         </>
     );
 }

@@ -81,7 +81,6 @@ setResult(response.data);
         <>
         <div className="pp-main-container">
          <div className="pp-left">
-          <p>{harsh?.contestId}</p>
             <p>Title:{harsh?.title}</p>
             <p>Description:{harsh?.description}</p>
             <p>Constraint:{harsh?.constraint}</p>

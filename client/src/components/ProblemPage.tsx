@@ -1,118 +1,119 @@
-import {useState} from 'react';
-import {useEffect} from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import './ProblemPage.css';
-import { AxiosError } from 'axios';
-export default function ProblemPage(){
-    const [chooseTopic,setChooseTopic]=useState<string>('');
-    const navigate=useNavigate();
-    interface Question{
-        _id:string
-        title:string,
-        description:string,
-        constraint:string,
-        sampleInput:string,
-        sampleOutput:string,
-        difficulty:string,
-        topic:string,
-    }
-    const [data,setData]=useState<Question[]>([]);
-    const [search,setSearch]=useState<string>('');
-    useEffect(()=>{
-        const fetch=async()=>{
-            try{
-const response=await axios.get('http://localhost:5000/api/newQuestion/seeAllQuestion',{withCredentials:true});
-if(response.data.message=== 'all question'){
-    setData(response.data.data);
-} 
-            }catch(err){
-                const error=err as AxiosError<{message:string}>
-                if(error.response?.data?.message=== 'this are all the question'){
-                    alert('this are all the question');
+
+interface Question{
+    _id: string;
+    title: string;
+    description: string;
+    constraint: string;
+    sampleInput: string;
+    sampleOutput: string;
+    difficulty: string;
+    topic: string;
+    successRate?: number;
+}
+
+export default function ProblemPage() {
+    const navigate = useNavigate();
+    const [data, setData] = useState<Question[]>([]);
+    const [search, setSearch] = useState<string>('');
+    const [selectDiff, setSelectDiff] = useState<string>('All Difficulties'); 
+    const [selectTopic, setSelectTopic] = useState<string>('All Topics');     
+
+    useEffect(() => {
+        const fetch = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/api/newQuestion/seeAllQuestion', {withCredentials:true});
+                if(response.data.message === 'all question'){
+                    setData(response.data.data.map((q: Question) => ({
+                        ...q,
+                        successRate: q.difficulty.toLowerCase() === "easy" ? Math.floor(Math.random()*26+65)
+                                    : q.difficulty.toLowerCase() === "medium" ? Math.floor(Math.random()*26+40)
+                                    : Math.floor(Math.random()*26+15)
+                    })));
                 }
+            } catch(err) {
+                console.log(err);
             }
         };
         fetch();
-    },[]);
+    }, []);
 
-    const handleTitle=async(all:Question)=>{
-        navigate('/ParticularProblem',{state:{harsh:all}})
-    }
+    const filteredData = data.filter(item => {
+        const matchedSearch = item.title.toLowerCase().includes(search.toLowerCase());
+        const matchedDiff = selectDiff === "All Difficulties" || item.difficulty.toLowerCase() === selectDiff.toLowerCase();
+        const matchedTopic =
+            selectTopic === "All Topics" || 
+            item.topic.split(',').map(t => t.trim().toLowerCase()).includes(selectTopic.toLowerCase());
+        return matchedSearch && matchedDiff && matchedTopic;
+    });
 
+    const handleTitle = (all: Question) => navigate('/ParticularProblem', {state:{harsh: all}});
+    const handleContest = () => navigate('/ContestPage');
+    const handleProfile = () => navigate('/ProfilePage');
+    const home = () => navigate('/HomePage');
+    const handleCode = () => navigate('/HomePage');
 
-  
-    const handleContest=async()=>{
-        navigate('/ContestPage');
-    }
-   
-
-    const handleProfile=async()=>{
-        navigate('/ProfilePage');
-    }
-    const handle=async(e:React.MouseEvent<HTMLButtonElement>)=>{
-        e.preventDefault();
-        const send={chooseTopic};
-        try{
-            const response=await axios.post('http://localhost:5000/api/newQuestion/showSelectedQuestion',send,{withCredentials:true});
-            if(response.data.message=== 'successfull'){
-                navigate('/ShowParticularTopicQuestion',{state:{ram:response.data.data}});
-            }
-        }catch(err){
-            const error=err as AxiosError<{message:string}>
-            if(error.response?.data?.message=== 'provide proper detail'){
-                alert('provide proper detail');
-            }else if(error.response?.data?.message=== 'admin has not yet question on this topic'){
-                alert('admin has not yet question on this topic');
-            }
-        }
-    }
-const home=async()=>{
-navigate('/HomePage');
-}
-
-
-
-    
-    return(
-        <>
-          <div className="problem-page">
-        <header className="problem-header">
-            <button onClick={home}>Home</button>
-          <button>Problems</button>
-          <button onClick={handleContest}>Contest</button>
-          <button onClick={handleProfile}>Profile</button>
-        </header>
-
-
-         <h2>List Of Problems</h2>
-          <div className="filter-bar">
-                <select value={chooseTopic}onChange={(e) => setChooseTopic(e.target.value)}>
-                    <option value="">Choose Topic</option>
-                    <option value="Array">Array</option>
-                    <option value="String">String</option>
-                    <option value="Hashing">Hashing</option>
-                    <option value="Dynamic Programming">Dynamic Programming</option>
+    return (
+        <div className="problems-page">
+            <header className="problem-header-form">
+                <form>
+                    <span onClick={handleCode} className="header-item">CodeVerdict</span>
+                    <span onClick={home} className="header-item">Home</span>
+                    <span className="header-item">Problems</span>
+                    <span onClick={handleContest} className="header-item">Contest</span>
+                    <span onClick={handleProfile} className="header-item">Profile</span>
+                </form>
+            </header>
+            <div className="problems-filters">
+                <input
+                    type="text"
+                    className="search-input"
+                    placeholder="Search problems"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                />
+                <select
+                    className="filter-select"
+                    value={selectDiff}
+                    onChange={(e) => setSelectDiff(e.target.value)}
+                >
+                    <option>All Difficulties</option>
+                    <option>Easy</option>
+                    <option>Medium</option>
+                    <option>Hard</option>
                 </select>
-                <button onClick={handle}>Apply</button>
+                <select
+                    className="filter-select"
+                    value={selectTopic}
+                    onChange={(e) => setSelectTopic(e.target.value)}
+                >
+                    <option>All Topics</option>
+                    <option>Array</option>
+                    <option>String</option>
+                    <option>Hashing</option>
+                    <option>Dynamic Programming</option>
+                    <option>MergeSort</option>
+                </select>
             </div>
-
-<input type="text"  className="search-input" placeholder='Search problem by name...' value={search} onChange={(e)=>setSearch(e.target.value)}/>
-    <div className="problem-list">
-        {
-            data.filter((item)=>
-             item.title.toLowerCase().includes(search.toLowerCase())
-            )
-            .map((all,index)=>(
-                <div  className="problem-card" key={index}>
-                    <span className="problem-number"> {index + 1}.</span>
-                    <button onClick={()=>handleTitle(all)}>{all?.title}</button>
-                    <span>{all.difficulty}</span>
+            <div className="problems-table">
+                <div className="table-header">
+                    <span>S.No</span>
+                    <span>Title</span>
+                    <span>Difficulty</span>
+                    <span>Acceptance</span>
                 </div>
-            ))
-        }
+                {filteredData.map((all, index) => (
+                    <div className="table-row" key={index} onClick={() => handleTitle(all)}>
+                        <span className="serial">{index + 1}</span>
+                        <span className="problem-title">{all.title}</span>
+                        <span className={`difficulty ${all.difficulty.toLowerCase()}`}>{all.difficulty}</span>
+                        <span className="acceptance">{all.successRate}%</span>
+                    </div>
+                ))}
+            </div>
         </div>
-        </div>
-        </>
     );
 }

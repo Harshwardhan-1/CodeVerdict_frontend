@@ -1,0 +1,107 @@
+/* CodeVerdictJoinNow.css - Dark modern theme */
+
+.codeverdict-join-wrapper {
+  min-height: 98vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #0f2027, #203a43);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  gap: 20px;
+  color: #FDFEFE;
+}
+
+.codeverdict-join-wrapper h1 {
+  font-size: 28px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.codeverdict-join-wrapper p {
+  font-size: 14px;
+  margin: 4px 0;
+}
+
+.codeverdict-join-wrapper h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 20px;
+}
+
+.problem-card, .leaderboard-card, .contest-info-card {
+  width: 100%;
+  max-width: 550px;
+  background-color: #2C3E50;
+  border-radius: 14px;
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.55);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.problem-card:hover, .leaderboard-card:hover, .contest-info-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.65);
+}
+
+.problem-card span.problem-number {
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.problem-card button {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #1A5276;
+  color: #FDFEFE;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.1s ease;
+}
+
+.problem-card button:hover {
+  background-color: #2874A6;
+}
+
+.problem-card button:active {
+  transform: scale(0.98);
+}
+
+.codeverdict-join-wrapper button {
+  padding: 12px 18px;
+  border: none;
+  border-radius: 8px;
+  background-color: #1A5276;
+  color: #FDFEFE;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.1s ease;
+}
+
+.codeverdict-join-wrapper button:hover {
+  background-color: #2874A6;
+}
+
+.codeverdict-join-wrapper button:active {
+  transform: scale(0.98);
+}
+
+.leaderboard-card p {
+  margin: 2px 0;
+}
+
+a {
+  color: #1A5276;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #2874A6;
+  text-decoration: underline;
+}

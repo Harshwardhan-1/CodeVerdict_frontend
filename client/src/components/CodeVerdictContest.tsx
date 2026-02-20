@@ -3,6 +3,7 @@ import axios from 'axios';
 import { AxiosError } from 'axios';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './CodeVerdictContest.css';
 export default function CodeVerdictContest(){
      interface contest{
         _id:string,
@@ -35,34 +36,52 @@ export default function CodeVerdictContest(){
     },[]);
     return(
         <>
-        <h1>This are the list of Contest</h1>
-        {
-            data.map((all,index)=>(
-                <div key={index}>
-                    <p>{all?._id}</p>
-                    <p>{all?.name}</p>
-                    <p>{all?.gmail}</p>
-                    <p>{all?.instructions}</p>
-                    <p>{new Date(all?.organizingDate).toLocaleDateString()}</p>
-                    <p>{new Date(all?.startingTimeOfContest).toLocaleTimeString("en-IN",{
-                        hour:"2-digit",
-                        minute:"2-digit",
-                        hour12:true
-                    })}</p>
-                    <p>{new Date(all?.endingTimeOfContest).toLocaleTimeString("en-IN",{
-                        hour:"2-digit",
-                        minute:"2-digit",
-                        hour12:true,
-                    })}</p>
-                    <p>
-  Join Link :<Link  to={`/verdict/join/${all._id}`} target="_blank"
-    rel="noopener noreferrer" style={{ color: "blue" }}>
-    http://localhost:5173/join/{all._id}
-  </Link>
-</p>
-                </div>
-            ))
-        }
+      <div className="code-verdict-wrapper">
+      <h1>List of CodeVerdict Contests</h1>
+      {data.map((all, index) => (
+        <div className="contest-card" key={index}>
+          <p>
+            <span>Name:</span> {all.name}
+          </p>
+          <p>
+            <span>Organizer:</span> {all.gmail}
+          </p>
+          <p>
+            <span>Instructions:</span> {all.instructions}
+          </p>
+          <p>
+            <span>Date:</span>{' '}
+            {new Date(all.organizingDate).toLocaleDateString()}
+          </p>
+          <p>
+            <span>Start:</span>{' '}
+            {new Date(all.startingTimeOfContest).toLocaleTimeString('en-IN', {
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: true,
+            })}
+          </p>
+          <p>
+            <span>End:</span>{' '}
+            {new Date(all.endingTimeOfContest).toLocaleTimeString('en-IN', {
+              hour: '2-digit',
+              minute: '2-digit',
+              hour12: true,
+            })}
+          </p>
+          <p>
+            <span>Join Link:</span>{' '}
+            <Link
+              to={`/verdict/join/${all._id}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              http://localhost:5173/join/{all._id}
+            </Link>
+          </p>
+        </div>
+      ))}
+        </div>
         </>
     );
 }

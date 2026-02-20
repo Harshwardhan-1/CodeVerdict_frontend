@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AxiosError } from "axios";
+import './JoinNow.css';
 export default function JoinNow(){
     const {contestId}=useParams();
     const navigate=useNavigate();
@@ -139,48 +140,43 @@ const showLeaderBoard=async(e:React.MouseEvent<HTMLButtonElement>)=>{
 }
     return(
         <>
-        {data && (
-            <>
-        <h1>Contest is live now</h1>
-        <p>Contest Id:{contestId}</p>
-                    <p>{data?.name}</p>
-                    <p>{data?.gmail}</p>
-                    <p>{data?.instructions}</p>
-                    <p>{new Date(data?.organizingDate).toLocaleDateString()}</p>
-                    <p>{new Date(data?.startingTimeOfContest).toLocaleTimeString()}</p>
-                    <p>{new Date(data?.endingTimeOfContest).toLocaleTimeString()}</p>
-                
-    {data?.questions?.map((qid, index) => ( <p key={index}>Question {index + 1} ID: {qid}</p>))}
-      </>
-        )}
-        <button onClick={showQuestions}>See All Questions</button>
-        <button onClick={showLeaderBoard}>LeaderBoard</button>
+       <div className="join-contest-wrapper">
+  {data && (
+    <div className="contest-info-card">
+      <h2>Contest Info</h2>
+      <p><span>Contest Id:</span> {contestId}</p>
+      <p><span>Name:</span> {data.name}</p>
+      <p><span>Organizer:</span> {data.gmail}</p>
+      <p><span>Instructions:</span> {data.instructions}</p>
+      <p><span>Date:</span> {new Date(data.organizingDate).toLocaleDateString()}</p>
+      <p><span>Start:</span> {new Date(data.startingTimeOfContest).toLocaleTimeString()}</p>
+      <p><span>End:</span> {new Date(data.endingTimeOfContest).toLocaleTimeString()}</p>
+    </div>
+  )}
+
+  <button onClick={showQuestions}>See All Questions</button>
+  <button onClick={showLeaderBoard}>LeaderBoard</button>
 
 
+  {contestQuestion.map((all, index) => (
+    <div className="problem-card" key={index}>
+      <span className="problem-number">{index + 1}.</span>
+      <button onClick={() => handleTitle(all)}>{all.title}</button>
+      <span>Difficulty: {all.difficulty}</span>
+    </div>
+  ))}
 
 
-        {
-            contestQuestion.map((all,index)=>(
-                <div  className="problem-card" key={index}>
-                    <span className="problem-number"> {index + 1}.</span>
-                    <button onClick={()=>handleTitle(all)}>{all?.title}</button>
-                    <p>{all?._id}</p>
-                    <span>{all.difficulty}</span>
-                </div>
-            ))
-        }
-
-
-        {
-            showLeaderBoardResult.map((all,index)=>(
-                <div key={index}>
-                    <p>Rank:{index+1}</p>
-                    <p>Name:{all?.name}</p>
-                    <p>Gmail:{all?.gmail}</p>
-                    <p>Points:{all?.points}</p>
-                </div>
-            ))
-        }
-                </>
+  {showLeaderBoardResult.map((all, index) => (
+    <div className="leaderboard-card" key={index}>
+      <p><span>Rank:</span> {index + 1}</p>
+      <p><span>Name:</span> {all.name}</p>
+      <p><span>Email:</span> {all.gmail}</p>
+      <p><span>Points:</span> {all.points}</p>
+    </div>
+  ))}
+</div>
+      
+          </>
     );
 }

@@ -1,0 +1,63 @@
+/* CodeVerdictContest.css - dark theme, compact style */
+
+.code-verdict-wrapper {
+  min-height: 98vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(135deg, #0f2027, #203a43);
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.code-verdict-wrapper h1 {
+  color: #FDFEFE;
+  font-size: 28px;
+  font-weight: bolder;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.contest-card {
+  width: 100%;
+  max-width: 500px;
+  background-color: #2C3E50;
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.55);
+  color: #FDFEFE;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.contest-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.65);
+}
+
+.contest-card p {
+  margin: 0;
+  font-size: 14px;
+  color: #D5D8DC;
+}
+
+.contest-card p span {
+  font-weight: 500;
+  color: #FDFEFE;
+}
+
+.contest-card a {
+  color: #1A5276;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.contest-card a:hover {
+  color: #2874A6;
+  text-decoration: underline;
+}
