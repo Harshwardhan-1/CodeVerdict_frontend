@@ -33,10 +33,7 @@ client/
 │
 ├── src/
 │   ├── components/
-│   ├── pages/
-│   ├── hooks/
-│   ├── services/
-│   ├── assets/
+│   ├── main.tsx/
 │   └── App.tsx
 │
 ├── public/
