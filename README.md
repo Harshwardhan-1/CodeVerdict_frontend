@@ -3,7 +3,7 @@
 ##  Screenshots
 
 ### Profile Page
-![Profile Page](assets/profilePage.png)
+![Profile Page](assets/screenshot/profilePage.png)
 
 
 ### Login Page
