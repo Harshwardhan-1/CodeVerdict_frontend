@@ -69,13 +69,12 @@ export default function AdminPage(){
         <>
           <div className="admin-page">
       <div className="admin-container">
-        <h1> Admin Add Harshwardhan Yadav Page </h1>
+        <h1> Admin Page </h1>
         <form className="admin-form" onSubmit={handleAddQuestion}>
 <input type="text" placeholder='Enter question title here' value={title} onChange={(e)=>setTitle(e.target.value)} />
-<input type="text" placeholder='Enter question descrption here' value={description} onChange={(e)=>setDescription(e.target.value)} />
-<input type="text" placeholder='Enter constraint here' value={constraint} onChange={(e)=>setConstraint(e.target.value)} />
+<textarea className="admin-textarea-large" placeholder='Enter question descrption here' value={description} onChange={(e)=>setDescription(e.target.value)} />
+<textarea className="admin-textarea-medium"  placeholder='Enter constraint here' value={constraint} onChange={(e)=>setConstraint(e.target.value)} />
 <textarea placeholder="Enter sample input " value={sampleInput} onChange={(e) => setSampleInput(e.target.value)}className="admin-textarea"/>
-
 <textarea placeholder="Enter sample output " value={sampleOutput} onChange={(e) => setSampleOutput(e.target.value)} className="admin-textarea"/>
 
 
@@ -100,10 +99,11 @@ export default function AdminPage(){
 
 
 
-
-     <button onClick={AddContest}>Add Code Verdict Contest</button>
-     <button onClick={showAllContest}>See All Contest</button>
-     <button onClick={seeAllQuestion}>See All Questions</button>
+<div className="admin-navigation">
+  <button onClick={AddContest}>Add Code Verdict Contest</button>
+  <button onClick={showAllContest}>See All Contest</button>
+  <button onClick={seeAllQuestion}>See All Questions</button>
+</div>
         </>
     );
 }

@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import {useState} from 'react';
 import axios from "axios";
 import { AxiosError } from "axios";
+import { Editor } from "@monaco-editor/react";
 import './ParticularProblem.css';
 export default function CodeVerdictContestQuestion(){
     interface TestCase{
@@ -82,7 +83,6 @@ setResult(response.data);
         <>
         <div className="pp-main-container">
          <div className="pp-left">
-          <p>{harsh?.contestId}</p>
             <p>Title:{harsh?.title}</p>
             <p>Description:{harsh?.description}</p>
             <p>Constraint:{harsh?.constraint}</p>
@@ -100,8 +100,23 @@ setResult(response.data);
      </div>
       <div className="pp-right">
         <p>Write your code here for problem {harsh?.title}</p>
-        <textarea  className="pp-code-editor" placeholder="Write your code here..." value={userCode} onChange={(e)=>setUserCode(e.target.value)}/>
-            <div className="pp-buttons">
+<Editor
+        height="400px"
+        width="100%"
+        language={language || "cpp"}
+        theme="vs-dark"
+        value={userCode}
+        onChange={(value) => setUserCode(value || "")}
+        options={{
+          fontSize: 16,         
+          fontFamily: "Fira Code, monospace",
+          lineHeight: 22,
+          minimap: { enabled: false },
+          wordWrap: "on",
+          automaticLayout: true
+        }}
+      />       
+        <div className="pp-buttons">
 
 
           <button onClick={handleRun} className="pp-run-btn">Run</button>

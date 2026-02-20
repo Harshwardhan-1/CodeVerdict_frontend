@@ -3,6 +3,7 @@ import {useState} from 'react';
 import axios from "axios";
 import { AxiosError } from "axios";
 import './ParticularProblem.css';
+import { Editor } from "@monaco-editor/react";
 export default function ContestQuestion(){
     interface TestCase{
         input:string,
@@ -87,8 +88,23 @@ setResult(response.data);
      </div>
      </div>
       <div className="pp-right">
-        <p>Write your code here for problem {harsh?.title}</p>
-        <textarea  className="pp-code-editor" placeholder="Write your code here..." value={userCode} onChange={(e)=>setUserCode(e.target.value)}/>
+        <p>Write your code here for problem: {harsh?.title}</p>
+<Editor
+        height="400px"
+        width="100%"
+        language={language || "cpp"}
+        theme="vs-dark"
+        value={userCode}
+        onChange={(value) => setUserCode(value || "")}
+        options={{
+          fontSize: 16,         
+          fontFamily: "Fira Code, monospace",
+          lineHeight: 22,
+          minimap: { enabled: false },
+          wordWrap: "on",
+          automaticLayout: true
+        }}
+      />       
             <div className="pp-buttons">
 
 
@@ -105,7 +121,7 @@ setResult(response.data);
             <p><b>Expected Output</b></p>
             <pre>{harsh?.sampleOutput}</pre>
           </div>
-
+      
 
 
             {result && !loading &&(

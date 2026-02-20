@@ -257,7 +257,7 @@ setLoading(false);
         value={userCode}
         onChange={(value) => setUserCode(value || "")}
         options={{
-          fontSize: 16,         
+          fontSize: 16,             
           fontFamily: "Fira Code, monospace",
           lineHeight: 22,
           minimap: { enabled: false },

@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { AxiosError } from "axios";
 import { useState } from "react";
+import './AdminSeeAllQuestion.css';
 export default function AdminSeeAllQuestion(){
     interface showQuestion{
         _id:string,
@@ -94,38 +95,57 @@ const submitUpdate=async()=>{
   
     return(
         <>
-        <h1>This are all the question</h1>
-        {
-            data.map((all,index)=>(
-                <div key={index}>
-                    <p>{all?._id}</p>
-                    <p>{all?.title}</p>
-                    <p>{all?.description}</p>
-                    <p>{all?.constraint}</p>
-                    <p>{all?.sampleInput}</p>
-                    <p>{all?.sampleOutput}</p>
-                    <p>{all?.difficulty}</p>
-                    <p>{all?.topic}</p>
-                    <p>{all?.points}</p>
-                    <button type="button" onClick={()=>handleDelete(all?._id)}>Delete</button>
-                    <button type="button" onClick={()=>handleUpdate(all)}>Update</button>
-                     {selectedId===all._id && (
-                <div>     
-    <input value={updateTite} onChange={e=>setUpdateTitle(e.target.value)} />
-    <input value={updateDescription} onChange={e=>setUpdateDescription(e.target.value)} />
-    <input value={UpdateConstraint} onChange={(e)=>{setUpdateConstraint(e.target.value)}} />
-    <input value={updateSampleInput} onChange={e=>setSampleInput(e.target.value)} />
-    <input value={updateSampleOutput} onChange={e=>setSampleOutput(e.target.value)} />
-    <input value={updateDifficult} onChange={e=>setUpdateDifficult(e.target.value)} />
-    <input value={updateTopic} onChange={e=>setUpdateTopic(e.target.value)} />
-    <input type="number"value={updatePoints} onChange={(e)=>setUpdatePoints(Number(e.target.value))}/>
-    <button onClick={submitUpdate}>Save Update</button>
-                </div>
-            )
-        }
-                </div>
-            ))
-        }
+         <div className="admin-question-page">
+    <h1 className="page-title">All Questions (Admin Panel)</h1>
+
+    <div className="question-grid">
+      {data.map((all, index) => (
+        <div key={index} className="question-card">
+          
+          <p className="question-id">ID: {all?._id}</p>
+          <h2 className="question-title">{all?.title}</h2>
+          
+          <p><strong>Description:</strong> {all?.description}</p>
+          <p><strong>Constraint:</strong> {all?.constraint}</p>
+          <p><strong>Sample Input:</strong> {all?.sampleInput}</p>
+          <p><strong>Sample Output:</strong> {all?.sampleOutput}</p>
+          
+          <div className="meta-info">
+            <span className="difficulty">{all?.difficulty}</span>
+            <span className="topic">{all?.topic}</span>
+            <span className="points">{all?.points} pts</span>
+          </div>
+
+          <div className="btn-group">
+            <button className="delete-btn" onClick={() => handleDelete(all?._id)}>
+              Delete
+            </button>
+            <button className="update-btn" onClick={() => handleUpdate(all)}>
+              Update
+            </button>
+          </div>
+
+          {selectedId === all._id && (
+            <div className="update-form">
+              <input value={updateTite} onChange={e => setUpdateTitle(e.target.value)} placeholder="Title" />
+              <textarea value={updateDescription} onChange={e => setUpdateDescription(e.target.value)} placeholder="Description" />
+              <input value={UpdateConstraint} onChange={e => setUpdateConstraint(e.target.value)} placeholder="Constraint" />
+              <input value={updateSampleInput} onChange={e => setSampleInput(e.target.value)} placeholder="Sample Input" />
+              <input value={updateSampleOutput} onChange={e => setSampleOutput(e.target.value)} placeholder="Sample Output" />
+              <input value={updateDifficult} onChange={e => setUpdateDifficult(e.target.value)} placeholder="Difficulty" />
+              <input value={updateTopic} onChange={e => setUpdateTopic(e.target.value)} placeholder="Topic" />
+              <input type="number" value={updatePoints} onChange={(e) => setUpdatePoints(Number(e.target.value))} placeholder="Points" />
+
+              <button className="save-btn" onClick={submitUpdate}>
+                Save Update
+              </button>
+            </div>
+          )}
+
+        </div>
+      ))}
+    </div>
+  </div>
         </>
     );
 }

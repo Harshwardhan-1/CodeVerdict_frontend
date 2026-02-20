@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { AxiosError } from "axios";
 import { useState } from "react";
+import './ShowAllContest.css';
 export default function ShowAllContest(){
     interface showContest{
         _id:string,
@@ -49,7 +50,9 @@ export default function ShowAllContest(){
     }
     return(
         <>
+         <div className="show-contest-page">
         <h1>Showing All Contest to Admin</h1>
+           <div className="contest-grid">
         {
             data.map((all,index)=>(
                 <div key={index}>
@@ -64,6 +67,8 @@ export default function ShowAllContest(){
                 </div>
             ))
         }
+        </div>
+        </div>
         </>
     );
 }

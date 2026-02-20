@@ -19,7 +19,7 @@
 }
 
 .signup-page h1 {
-  color: #FDFEFE; /* bright white */
+  color: #FDFEFE; 
   font-size: 26px;
   font-weight: bolder;
   margin-bottom: 10px;
@@ -28,7 +28,7 @@
 
 .signup-page p {
   font-size: 14px;
-  color: #AAB7B8; /* softer subtitle */
+  color: #AAB7B8; 
   text-align: center;
   margin-bottom: 20px;
 }
@@ -49,8 +49,8 @@
 .signup-page input {
   padding: 11px 10px;    
   border-radius: 8px;
-  border: 1px solid #566573; /* lighter border */
-  background-color: #1C2833; /* input bg darker */
+  border: 1px solid #566573;
+  background-color: #1C2833; 
   color: #FDFEFE;
   font-size: 14px;
   outline: none;
