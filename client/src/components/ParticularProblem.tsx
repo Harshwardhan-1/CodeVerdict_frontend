@@ -1,309 +1,344 @@
 import { useLocation } from "react-router-dom";
-import {useState} from 'react';
-import axios from "axios";
-import { useEffect } from "react";
-import { AxiosError } from "axios";
-import './ParticularProblem.css';
+import { useState, useEffect } from "react";
+import axios, { AxiosError } from "axios";
+import "./ParticularProblem.css";
 import { useNavigate } from "react-router-dom";
-import {Editor} from "@monaco-editor/react";
 import { io } from "socket.io-client";
-export default function ParticularProblem(){
-  const navigate=useNavigate();
+import { CodeEditor } from "./CodeEditor";
 
-    interface TestCase{
-       testCaseNumber:number,
-        input:string,
-        expectedOutput:string,
-        userOutput:string,
-        status:string,
-    }
+export default function ParticularProblem() {
 
-  
+  const navigate = useNavigate();
+  const location = useLocation();
+  const harsh = location.state?.harsh;
 
-    interface submitCheckIt{
-      alreadySubmit:string,
-      userCode:string,
-    }
-
-interface RunResult{
-  message:string,
-  passed:number,
-  total:number,
-  data:TestCase[]
-}
-
-const [result, setResult]=useState<RunResult | null>(null);
-    const [language,setLanguage]=useState('');
-    const [userCode,setUserCode]=useState('');
-    const [loading,setLoading]=useState(false);
-    const [submitCheck,setSubmitCheck]=useState<submitCheckIt>();
-   const location=useLocation();
-    const harsh=location.state?.harsh;
-   
-//     useEffect(()=>{
-//       if(!language || !harsh?.title)return;
-//       setUserCode("");
-//       const send={language:language,title:harsh?.title};
-//       const fetch=async()=>{
-//         try{
-//           const response=await axios.post('http://localhost:5000/api/submit/getSolution',send,{withCredentials:true});
-//           if(response.data.message=== 'successfull'){
-//             setUserCode(response.data.data.userCode);
-//           }
-//         }catch(err){
-//         console.log(err);
-//         }
-//       };
-//       fetch();
-// },[language,harsh?.title]);
-
-
-useEffect(() => {
-  if (!language || !harsh?.title) return;
-
-  let cancelled = false;
-
-  const send = {
-    language,
-    title: harsh.title,
-  };
-
-  const fetchSolution = async () => {
-    try {
-      const response = await axios.post("http://localhost:5000/api/submit/getSolution",send,{ withCredentials: true });
-      if (cancelled) return;
-      if (response.data.message === "successfull") {
-        setUserCode(response.data.data.userCode);
-      } else {
-        setUserCode("");
-      }
-    } catch (err) {
-      if (!cancelled) {
-        console.log(err);
-        setUserCode("");
-      }
-    }
-  };
-  fetchSolution();
-  return () => {
-    cancelled = true;
-  };
-}, [language, harsh?.title]);
-
-    
-const [loadingText,setLoadingText]=useState("");
-useEffect(()=>{
-  const socket = io("http://localhost:5000");
-  socket.on("progress", (data) => {
-    console.log(data);
-    if(data.type === "running"){
-      setLoadingText(`Running test case ${data.testCase}...`);
-    }
-    if(data.type === "passed"){
-      setLoadingText(`Test case ${data.testCase} passed`);
-    }
-    if(data.type === "failed"){
-      setLoadingText(`Test case ${data.testCase} failed`);
-    }
-  });
-
-  return ()=>{
-    socket.disconnect();
+  interface TestCase {
+    testCaseNumber: number;
+    input: string;
+    expectedOutput: string;
+    userOutput: string;
+    status: string;
   }
-}, []);
 
+  interface RunResult {
+    message: string;
+    passed: number;
+    total: number;
+    data: TestCase[];
+  }
 
- 
-useEffect(()=>{
-  const fetch=async()=>{
-    try{
-      const response=await axios.post('http://localhost:5000/api/submit/checkSubmit',{title:harsh?.title},{withCredentials:true});
-      if(response.data.message=== 'successfull'){
-        setLanguage(response.data.data.language);
-        setUserCode(response.data.data.userCode);
-        setSubmitCheck(response.data.data);
+  interface SubmitCheck {
+    alreadySubmit: string;
+    userCode: string;
+    language: string;
+  }
+
+  interface GetInput {
+    title: string;
+    sampleInput: string;
+    sampleOutput: string;
+    difficulty: string;
+  }
+
+  const [language, setLanguage] = useState("cpp");
+  const [userCode, setUserCode] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [loadingText, setLoadingText] = useState("");
+  const [result, setResult] = useState<RunResult | null>(null);
+  const [submitCheck, setSubmitCheck] = useState<SubmitCheck>();
+  const [input, setInput] = useState<GetInput[]>([]);
+
+  const boilerplates: Record<string, string> = {
+    cpp: `
+#include <iostream>
+using namespace std;
+/*
+ Write your solution here 
+IMPORTANT: 
+- Do NOT return the answer 
+- PRINT the answer using cout 
+void solve(){ 
+}
+ */
+int main() {
+    return 0;
+}`,
+    python: `def solve():
+    # IMPORTANT: 
+    # - Do NOT return the answer 
+    # - PRINT the answer using print()
+    pass
+
+solve()`,
+    java: `public class Main {
+    public static void main(String[] args) {
+/*
+ Write your solution here 
+ IMPORTANT: 
+- Do NOT return the answer 
+- PRINT the answer using 
+System.out.println() 
+*/
+    }
+}`
+  };
+
+  useEffect(() => {
+    if (!language || !harsh?.title) return;
+
+    const fetchSolution = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/api/submit/getSolution",
+          { language, title: harsh.title },
+          { withCredentials: true }
+        );
+
+        if (response.data.message === "successfull" && response.data.data?.userCode) {
+          setUserCode(response.data.data.userCode);
+        } else {
+          setUserCode(boilerplates[language]);
+        }
+      } catch {
+        setUserCode(boilerplates[language]);
       }
-    }catch(err){
-      const error=err as AxiosError<{message:string}>
-      if(error.response?.data?.message=== 'provide proper detail'){
-        alert('provide proper detail');
+    };
+
+    fetchSolution();
+  }, [language, harsh?.title]);
+
+  useEffect(() => {
+    if (!harsh?.title) return;
+
+    const fetch = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/api/newQuestion/getSampleInput",
+          { title: harsh.title },
+          { withCredentials: true }
+        );
+
+        if (response.data.message === "successfull") {
+          setInput(response.data.data);
+        }
+      } catch (err) {
+        const error = err as AxiosError<{ message: string }>;
+        if (error.response?.data?.message) {
+          alert(error.response.data.message);
+        }
       }
+    };
+
+    fetch();
+  }, [harsh?.title]);
+
+  useEffect(() => {
+    const socket = io("http://localhost:5000");
+
+    socket.on("progress", (data) => {
+      if (data.type === "running") {
+        setLoadingText(`Running test case ${data.testCase}...`);
+      }
+      if (data.type === "passed") {
+        setLoadingText(`Test case ${data.testCase} passed`);
+      }
+      if (data.type === "failed") {
+        setLoadingText(`Test case ${data.testCase} failed`);
+      }
+    });
+
+    return () => {socket.disconnect()};
+  }, []);
+
+  useEffect(() => {
+    if (!harsh) return;
+
+    const fetch = async () => {
+      try {
+        const response = await axios.post(
+          "http://localhost:5000/api/submit/checkSubmit",
+          { title: harsh.title },
+          { withCredentials: true }
+        );
+
+        if (response.data.message === "successfull") {
+          setLanguage(response.data.data.language);
+          setUserCode(response.data.data.userCode);
+          setSubmitCheck(response.data.data);
+        }
+      } catch(err){
+        console.log(err);
+      }
+    };
+
+    fetch();
+  }, [harsh]);
+
+  const handleRun = async () => {
+    if (!harsh?.title) return;
+
+    setLoading(true);
+    setResult(null);
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/run/runCode",
+        { title: harsh.title, language, userCode },
+        { withCredentials: true }
+      );
+
+      setResult(response.data);
+    } catch (err) {
+      const error = err as AxiosError<{ message: string }>;
+      if (error.response?.data?.message) {
+        alert(error.response.data.message);
+      }
+    } finally {
+      setLoading(false);
     }
   };
-  if(harsh)fetch();
-},[harsh]);
 
+  const handleSubmit = async () => {
+    if (result?.message !== "all test case pass") {
+      alert("First pass all test cases");
+      return;
+    }
 
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/submit/userCode",
+        {
+          userId: harsh?.userId,
+          title: harsh.title,
+          description: harsh.description,
+          userCode,
+          difficulty: harsh?.difficulty,
+          topic: harsh?.topic,
+          language
+        },
+        { withCredentials: true }
+      );
 
-
-
-    const handleRun=async()=>{
-        const send={title:harsh.title,language:language,userCode:userCode};
-        setLoading(true); 
-        setResult(null);
-        try{
-const response=await axios.post('http://localhost:5000/api/run/runCode',send,{withCredentials:true});
-setResult(response.data);
-setLoading(false);
-        }catch(err){
-          setLoading(false);
-            const error= err as AxiosError<{message:string}>
-            if(error.response?.data?.message=== 'provide proper detail'){
-                alert('provide proper detail');
-            }else if(error.response?.data?.message=== 'admin has not completely make the question and added does not hidden test case for it'){
-                alert('admin has not yet add test cases');
-            }
-        }
-        // finally{
-        //     setLoading(false);
-        // }
+      if (response.data.message === "successfully submitted") {
+        alert("Successfully submitted");
       }
+    } catch (err){
+      console.log(err);
+    }
+  };
 
+  const discussSolution = () => {
+    navigate("/DiscussPage", {
+      state: { ram: { title: harsh?.title, language, userCode } }
+    });
+  };
 
-      const handleSubmit=async()=>{
-        const send={userId:harsh?.userId,title:harsh.title,description:harsh.description,userCode:userCode,difficulty:harsh?.difficulty,topic:harsh?.topic,language:language};
-    if(result?.message=== 'all test case pass'){
-            try{
-          const response=await axios.post('http://localhost:5000/api/submit/userCode',send,{withCredentials:true});
-          if(response.data.message=== 'successfully submitted'){
-            alert('successfully submitted');
-          }
-        }catch(err){
-          const error=err as AxiosError<{message:string}>
-          if(error.response?.data?.message=== 'provide proper detail'){
-            alert('provide proper detail');
-          }else if(error.response?.data?.message=== 'try some other question you have alredy solved it 20 times'){
-            alert('try some other question you have alredy solved it multiple times');
-          }
-        }
-      }else{
-        alert('first pass all the test case then only you will able to submit it');
+  const handleSeeSolution = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/api/discuss/checkDiscuss",
+        { title: harsh?.title },
+        { withCredentials: true }
+      );
+
+      if (response.data.message === "successfully found") {
+        navigate("/SeeSolution", { state: { ra: response.data.data } });
       }
-      }
+    } catch(err){
+    console.log(err);
+    }
+  };
 
+  return (
+    <div className="pp-main-container">
 
+      <div className="pp-left">
+        <p> Difficulty:{" "}
+  <span className={`pp-difficulty-text ${harsh?.difficulty?.toLowerCase()}`}>{harsh?.difficulty}</span>
+</p>
+        <div className="pp-title-row">
+          <p>Title: {harsh?.title}</p>
+          {submitCheck?.alreadySubmit === "solved" && (
+            <span className="pp-solved-badge">Solved</span>
+          )}
+        </div>
 
+        <p>Description:{harsh?.description}</p>
+        <p>Constraints:{harsh?.constraint}</p>
 
+        {!loading && !result && (
+          input.map((key, index) => (
+            <div key={index}>
+              <p>Example {index + 1}</p>
+              <pre>{key.sampleInput}</pre>
+              <p><b>Expected Output</b></p>
+              <pre>{key.sampleOutput}</pre>
+            </div>
+          ))
+        )}
 
-
-      const discussSolution=async(e:React.MouseEvent<HTMLButtonElement>)=>{
-        e.preventDefault();
-        if(submitCheck){
-         navigate('/DiscussPage',{state:{ram:{title:harsh?.title,language,userCode}}})
-
-        }
-      else if(result?.message!== 'all test case pass'){
-          alert('first pass all the test cases then you will be able to discuss it');
-        }else{
-          navigate('/DiscussPage',{state:{ram:{title:harsh?.title,language,userCode}}})
-        }
-      }
-
-
-
-
-
-
-
-      const handleSeeSolution=async(e:React.MouseEvent<HTMLButtonElement>)=>{
-        e.preventDefault();
-        const send={title:harsh?.title};
-        try{
-          const response=await axios.post('http://localhost:5000/api/discuss/checkDiscuss',send,{withCredentials:true});
-          if(response.data.message=== 'successfully found'){
-            navigate('/SeeSolution',{state:{ra:response.data.data}})
-          }
-        }catch(err){
-          const error=err as AxiosError<{message:string}>
-          if(error.response?.data?.message=== 'no one has discuss the solution yet'){
-            alert('no one has share the solution yet be the one to share first');
-          }else if(error.response?.data?.message=== 'provide proper detail'){
-            alert('provide proper detail');
-          }
-        }
-      }
-
-
-      
-    return(
-        <>
-        <div className="pp-main-container">
-         <div className="pp-left">
-            <div className="pp-title-row"><p>Title: {harsh?.title}</p>
-       {submitCheck?.alreadySubmit === "solved" && (<span className="pp-solved-badge">Solved </span>)}
-</div>
-            <p>Description:{harsh?.description}</p>
-            <p>Constraint:{harsh?.constraint}</p>
-            <p>Difficulty:{harsh?.difficulty}</p>
-            <p>Topic:{harsh?.topic}</p>
-        
-    <div className="pp-language-select">
-        <select value={language} onChange={(e)=>setLanguage(e.target.value)}>
-            <option value="Select Langauge">Select Language</option>
-            <option value="cpp">C++</option>
-            <option value="java">java</option>
-            <option value="python">python</option>
-        </select>
-     </div>
-     </div>
-      <div className="pp-right">
-        <p>Write your code here for problem {harsh?.title}</p>
-
-   <Editor
-        height="400px"
-        width="100%"
-        language={language || "cpp"}
-        theme="vs-dark"
-        value={userCode}
-        onChange={(value) => setUserCode(value || "")}
-        options={{
-          fontSize: 16,             
-          fontFamily: "Fira Code, monospace",
-          lineHeight: 22,
-          minimap: { enabled: false },
-          wordWrap: "on",
-          automaticLayout: true
-        }}
-      />       
-
-  <div className="pp-buttons">
-          <button onClick={handleRun} className="pp-run-btn">Run</button>
-          <button onClick={handleSubmit} className="pp-submit-btn">Submit</button>
-          <button onClick={discussSolution} className="pp-submit-btn">Discuss Solution</button>
-          <button onClick={handleSeeSolution} className="pp-submit-btn">View Accepted Solution</button>
-           {/* {loading && ( <div className="pp-loading"><p>Running...</p></div>)} */}
-          {loading && <p>{loadingText}</p>} 
-    </div>
-        <div className="pp-testcase pass">
-            <p><b>Sample TestCase</b></p>
-            <pre>{harsh?.sampleInput}</pre>
-
-            <p><b>Expected Output</b></p>
-            <pre>{harsh?.sampleOutput}</pre>
+       
+        {loading && (
+          <div className="pp-running-box">
+            <h3>Running Testcases...</h3>
+            <p>{loadingText}</p>
           </div>
-
-
-
-            {result && !loading &&(
+        )}
+        {result && !loading && (
           <div className="pp-output-box">
-            <h3 style={{color: result.message === "all test case pass" ? "#22c55e" : "#ef4444"}}>
+            <h3 style={{
+              color: result.message === "all test case pass" ? "#22c55e" : "#ef4444"
+            }}>
               {result.message}
             </h3>
-    <p style={{fontWeight:"bold"}}>{result.passed}/{result.total} Test Cases Passed</p>
-            {result.data.length>0 && 
-            result.data.map((tc, index) => (
-              <div key={index} className="pp-testcase fail">
-               <p><b>Failed Test Case {tc.testCaseNumber}</b></p>
+
+            <p>{result.passed}/{result.total} Test Cases Passed</p>
+
+            {result.data.map((tc, index) => (
+              <div key={index} className="pp-testcase">
                 <pre>Input: {tc.input}</pre>
                 <pre>Expected: {tc.expectedOutput}</pre>
                 <pre>Your Output: {tc.userOutput}</pre>
-                 <p>Status: <span className="pp-status">{tc.status}</span></p>             
-                  </div>
+                <p>Status: {tc.status}</p>
+              </div>
             ))}
           </div>
         )}
       </div>
+
+      <div className="pp-right">
+
+
+        <div className="pp-editor-header">
+          <select value={language} onChange={(e) => setLanguage(e.target.value)}>
+            <option value="cpp">C++</option>
+            <option value="java">Java</option>
+            <option value="python">Python</option>
+          </select>
+
+          <div>
+            <button onClick={handleRun} className="pp-run-btn">Run</button>
+            <button onClick={handleSubmit} className="pp-submit-btn">Submit</button>
+          </div>
+        </div>
+
+        <CodeEditor
+          code={userCode}
+          setCode={setUserCode}
+          language={language}
+        />
+
+        <div className="pp-buttons">
+          <button onClick={discussSolution} className="pp-submit-btn">
+            Discuss Solution
+          </button>
+
+          <button onClick={handleSeeSolution} className="pp-submit-btn">
+            View Accepted Solution
+          </button>
+        </div>
+
+      </div>
     </div>
-        </>  
-    );
+  );
 }

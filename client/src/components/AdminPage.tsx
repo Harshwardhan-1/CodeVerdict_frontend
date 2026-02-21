@@ -76,9 +76,6 @@ export default function AdminPage(){
 <textarea className="admin-textarea-medium"  placeholder='Enter constraint here' value={constraint} onChange={(e)=>setConstraint(e.target.value)} />
 <textarea placeholder="Enter sample input " value={sampleInput} onChange={(e) => setSampleInput(e.target.value)}className="admin-textarea"/>
 <textarea placeholder="Enter sample output " value={sampleOutput} onChange={(e) => setSampleOutput(e.target.value)} className="admin-textarea"/>
-
-
-
 <input type="text" placeholder='Enter points for this question' value={points} onChange={(e)=>setPoints(e.target.value)} />
 
 

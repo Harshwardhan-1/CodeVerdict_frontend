@@ -1,5 +1,6 @@
 import {useNavigate } from "react-router-dom";
 import './HomePage.css';
+import { motion } from "framer-motion";
 export default function HomePage() {
   const navigate = useNavigate();
   return (
@@ -14,16 +15,24 @@ export default function HomePage() {
           </p>
 
           <div className="hero-actions">
-            <button className="primary-btn"
+            <motion.button className="primary-btn"
               onClick={()=> navigate("/ProblemPage") }
-            >Start Solving</button>
-            <button className="secondary-btn"
+            initial={{x:-100,opacity:0}}
+            animate={{x:0,opacity:1}}
+                transition={{duration:1,ease:"easeInOut"}}
+            >Start Solving</motion.button>
+            <motion.button className="secondary-btn"
               onClick={()=> navigate("/ProblemPage")}
-            >Explore Problems</button>
+            initial={{x:100,opacity:0}}
+            animate={{x:0,opacity:1}}
+            transition={{duration:1,ease:"easeInOut"}}
+            >Explore Problems</motion.button>
           </div>
         </section>
 
-        <section className="stats">
+        <section className="stats"
+
+        >
           <div className="stat-card">
             <p>Solve daily problems</p>
           </div>

@@ -59,13 +59,13 @@ export default function ProblemPage() {
     return (
         <div className="problems-page">
             <header className="problem-header-form">
-                <form>
+                
                     <span onClick={handleCode} className="header-item">CodeVerdict</span>
                     <span onClick={home} className="header-item">Home</span>
                     <span className="header-item">Problems</span>
                     <span onClick={handleContest} className="header-item">Contest</span>
                     <span onClick={handleProfile} className="header-item">Profile</span>
-                </form>
+                
             </header>
             <div className="problems-filters">
                 <input

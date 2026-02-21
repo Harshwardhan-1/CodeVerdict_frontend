@@ -8,7 +8,7 @@ return res.status(200).json({
     message:"this are all the hidden test cases",
     data:allHidden,
 });
-}
+} 
 
 
 export const addHiddenTest=async(req:Request,res:Response)=>{

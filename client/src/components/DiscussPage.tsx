@@ -42,7 +42,8 @@ useEffect(()=>{
             const error=err as AxiosError<{message:string}>
             if(error.response?.data?.message=== 'provide proper detail'){
                 alert('provide proper detail');
-            }else if(error.response?.data?.message=== 'no discussion of this question'){
+                //change here
+            }else if(error.response?.data?.message=== 'no discussions of this question'){
                 alert('no discussion of this question');
             }
         }

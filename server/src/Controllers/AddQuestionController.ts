@@ -37,12 +37,12 @@ if(!title || !description || !constraint || !sampleInput || !sampleOutput || !di
         message:"provide proper detail",
     });
 }
-const checkIt=await addQuestionModel.findOne({title});
-if(checkIt){
-    return res.status(401).json({
-        message:"already have sameInput sameOutput for same question",
-    });
-}
+// const checkIt=await addQuestionModel.findOne({title});
+// if(checkIt){
+//     return res.status(401).json({
+//         message:"already have sameInput sameOutput for same question",
+//     });
+// }
 const user=(req as any).user;
 const userId=user.userId;
 const createQuestion=await addQuestionModel.create({
@@ -62,7 +62,24 @@ return res.status(200).json({
 });
 }
 
-
+export const getSampleInput=async(req:Request,res:Response)=>{
+const {title}=req.body;
+if(!title){
+    return res.status(400).json({
+        message:"title missing for sample input and output",
+    });
+}
+const checkIt=await addQuestionModel.find({title});
+if(checkIt.length===0){
+    return res.status(400).json({
+        message:"no sample input",
+    });
+}
+return res.status(200).json({
+    message:"successfull",
+    data:checkIt,
+});
+}
 
 
 

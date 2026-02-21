@@ -16,18 +16,34 @@
   gap: 16px;
   flex-wrap: wrap;
 }
-.header-item {
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 500;
-  color: #FFFFFF;
-  padding: 6px 12px;
-  border-radius: 4px;
-  transition: all 0.2s ease;
+.problem-header-form {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
 }
+.header-item {
+  margin-right: 0;
+  cursor: pointer;  
+}
+
+
+.problem-header-form span:nth-child(1) {
+  margin-right: auto;
+}
+
+.problem-header-form span:nth-child(2),
+.problem-header-form span:nth-child(3),
+.problem-header-form span:nth-child(4) {
+  margin: 0 15px;
+}
+
+
+.problem-header-form span:nth-child(5) {
+  margin-left: auto;
+}
+
 .header-item:hover {
-  background-color: #132E32;
-  color: #FDFEFE;
+  color: #22C55E;
 }
 
 
