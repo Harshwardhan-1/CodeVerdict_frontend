@@ -22,6 +22,8 @@ export default function AdminPage(){
         const response=await axios.post('http://localhost:5000/api/newQuestion/addQuestion',send,{withCredentials:true});
         if(response.data.message=== 'question created successfully'){
             alert('question created successfull');
+        }else if(response.data.message=== 'sampleInput successfully added'){
+            alert('sampleInput successfully added');
         }
     }catch(err){
         const error=err as AxiosError<{message:string}>;

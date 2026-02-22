@@ -10,11 +10,13 @@
 ![Login](assets/screenshot/login.png)
 
 ### Home Page
-![Home](assets/screenshot/image.png)
+![Home](assets/screenshot/image1.png)
 
 ### HeatMap Page
 ![HeatMap](assets/screenshot/heatmap.png)
 
+### See Problem
+![Problem](assets/screenshot/see1Problem.png)
 
 ### Discuss Approach
 ![Discuss](assets/screenshot/discussApproach.png)
@@ -22,12 +24,14 @@
 ### Problem List
 ![Problem List](assets/screenshot/SeeProblem.png)
 
-### See Problem
-![Problem](assets/screenshot/see1Problem.png)
+
 
 ### Problem List
 ![Problem List](assets/screenshot/SeeProblem.png)
 
+
+### Running Code
+![Running](assets/screenshot/runningTestCase.png)
 
 ---
 

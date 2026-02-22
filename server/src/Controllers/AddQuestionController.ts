@@ -37,12 +37,20 @@ if(!title || !description || !constraint || !sampleInput || !sampleOutput || !di
         message:"provide proper detail",
     });
 }
-// const checkIt=await addQuestionModel.findOne({title});
-// if(checkIt){
-//     return res.status(401).json({
-//         message:"already have sameInput sameOutput for same question",
-//     });
-// }
+
+const existing=await addQuestionModel.findOne({title});
+    if(existing){
+        existing.sampleCases.push({
+            sampleInput,
+            sampleOutput,
+        });
+
+await existing.save();
+return res.status(200).json({
+    message:"sampleInput successfully added",
+});
+}
+
 const user=(req as any).user;
 const userId=user.userId;
 const createQuestion=await addQuestionModel.create({
@@ -50,8 +58,12 @@ userId:userId,
 title,
 description,
 constraint,
-sampleInput,
-sampleOutput,
+sampleCases: [
+      {
+        sampleInput,
+        sampleOutput
+      }
+    ],
 points,
 difficulty,
 topic,
@@ -69,15 +81,15 @@ if(!title){
         message:"title missing for sample input and output",
     });
 }
-const checkIt=await addQuestionModel.find({title});
-if(checkIt.length===0){
+const checkIt=await addQuestionModel.findOne({title});
+if(!checkIt){
     return res.status(400).json({
         message:"no sample input",
     });
 }
 return res.status(200).json({
     message:"successfull",
-    data:checkIt,
+    data:checkIt.sampleCases,
 });
 }
 

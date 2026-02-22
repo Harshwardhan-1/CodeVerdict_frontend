@@ -17,14 +17,20 @@ const addQuestionSchema=new mongoose.Schema({
         type:String,
         required:true,
     },
-    sampleInput:{
-        type:String,
-        required:true,
-    },
-    sampleOutput:{
-        type:String,
-        required:true,
-    },
+    // sampleInput:{
+    //     type:String,
+    //     required:true,
+    // },
+    // sampleOutput:{
+    //     type:String,
+    //     required:true,
+    // },
+    sampleCases: [
+      {
+        sampleInput:String,
+        sampleOutput:String,
+      }
+    ],
     points:{
         type:Number,
         required:true,

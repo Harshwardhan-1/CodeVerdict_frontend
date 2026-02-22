@@ -468,35 +468,6 @@ const handleEdit=async()=>{
             <div>
             </div>
         </div>
-{/* 
-<div className="heatmap-container"></div>
-<div className="year-controls" style={{ marginBottom: "15px" }}>
-  <button onClick={()=>setYear(year - 1)}>Prev</button>
-
-  <span style={{ margin:"0 15px",fontWeight:"bold"}}>
-    {year}
-  </span>
-
-  <button onClick={()=>setYear(year + 1)}>Next</button>
-</div>
-
-    <CalendarHeatMap
-  startDate={new Date(`${year}-01-01`)}
-  endDate={new Date(`${year}-12-31`)}
-  values={heatmap}
-  classForValue={(v) => {
-    if (!v) return "color-empty";
-    if (v.count >= 4) return "color-4";
-    if (v.count >= 3) return "color-3";
-    if (v.count >= 2) return "color-2";
-    return "color-1";
-  }}
-  titleForValue={(v) => {
-    if (!v) return "No submissions";
-    return `${v.count} submissions on ${v.date}`;
-  }}
-/> */}
-
 <motion.div className="heatmap-section"
 initial={{y:50,opacity:0}}
 whileInView={{y:0,opacity:1}}

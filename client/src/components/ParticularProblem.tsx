@@ -111,6 +111,8 @@ System.out.println()
     fetchSolution();
   }, [language, harsh?.title]);
 
+
+
   useEffect(() => {
     if (!harsh?.title) return;
 
@@ -300,7 +302,8 @@ System.out.println()
         </div>
 
         <p>Description:{harsh?.description}</p>
-        <p>Constraints:{harsh?.constraint}</p>
+        <p><b>Constraints:</b></p>
+        <pre>{harsh?.constraint}</pre>
 
         {!loading && !result && (
           input.map((key, index) => (
