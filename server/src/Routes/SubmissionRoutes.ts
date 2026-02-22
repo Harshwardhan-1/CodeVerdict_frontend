@@ -6,6 +6,7 @@ import { submitUserCode,allSubmission,allPoints,checkSubmit,submission,heatMap,a
 import { userOrganizeSubmitCodes } from "../Controllers/userOrganizeSubmitCode";
 import { codeVerdictContestSubmitCode } from "../Controllers/codeVerdictContestSubmitCode";
 import { showCodeVerdictLeaderBoard } from "../Controllers/codeVerdictContestSubmitCode";
+import { checkSubmitted } from "../Controllers/SubmissionController";
 
 submitCodeRoutes.get('/allPoints',verifyToken,verifyStudent,allPoints);
 submitCodeRoutes.get('/allSubmission',verifyToken,verifyStudent,allSubmission);
@@ -20,4 +21,5 @@ submitCodeRoutes.get('/activeDays',verifyToken,verifyStudent,activeDays);
 submitCodeRoutes.get('/checkStreak',verifyToken,verifyStudent,checkStreak);
 submitCodeRoutes.get('/checklanguage',verifyToken,verifyStudent,checkLanguage);
 submitCodeRoutes.post('/getSolution',verifyToken,verifyStudent,getSolution);
+submitCodeRoutes.post('/checkSubmitted',verifyToken,verifyStudent,checkSubmitted);
 export default submitCodeRoutes;

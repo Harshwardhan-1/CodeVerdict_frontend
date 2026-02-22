@@ -360,7 +360,22 @@ export const submission=async(req:Request,res:Response)=>{
 
 
 
-
+export const checkSubmitted=async(req:Request,res:Response)=>{
+    const {title}=req.body;
+    if(!title){
+        return res.status(400).json({
+            message:"title not found",
+        });
+    }
+    const user=(req as any).user;
+    const gmail=user.gmail;
+    const checkIt=await submitModel.findOne({gmail,title});
+    if(checkIt){
+        return res.status(200).json({
+            message:"successfull",
+        });
+    }
+}
 
 
 

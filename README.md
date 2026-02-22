@@ -12,7 +12,7 @@
 ### Home Page
 ![Home](assets/screenshot/image1.png)
 
-### HeatMap Page
+### HeatMap
 ![HeatMap](assets/screenshot/heatmaps.png)
 
 ### See Problem

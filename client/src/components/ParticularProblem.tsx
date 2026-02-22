@@ -156,6 +156,10 @@ System.out.println()
     return () => {socket.disconnect()};
   }, []);
 
+
+
+
+
   useEffect(() => {
     if (!harsh) return;
 
@@ -233,14 +237,44 @@ System.out.println()
     }
   };
 
-  const discussSolution = () => {
-    if(result?.message!=="all test case pass"){
-      return alert('first pass all the test cases');
+
+
+
+const [alreadySubmitted,setAlreadySubmitted]=useState<boolean>(false);
+useEffect(()=>{
+  const fetch=async()=>{
+    const response=await axios.post('http://localhost:5000/api/submit/checkSubmitted',{title:harsh?.title},{withCredentials:true});
+    if(response.data.message=== 'successfull'){
+      setAlreadySubmitted(true);
     }
-    navigate("/DiscussPage", {
+  };
+  fetch();
+},[harsh?.title]);
+
+
+
+
+
+
+
+
+
+
+ const discussSolution = () => {
+  if (result?.message === "all test case pass") {
+    return navigate("/DiscussPage", {
       state: { ram: { title: harsh?.title, language, userCode } }
     });
-  };
+  }
+
+  if (alreadySubmitted) {
+    return navigate("/DiscussPage", {
+      state: { ram: { title: harsh?.title, language, userCode } }
+    });
+  }
+
+  alert("first pass all the test cases");
+};
 
   const handleSeeSolution = async () => {
     try {
