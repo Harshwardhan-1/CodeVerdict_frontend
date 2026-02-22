@@ -51,33 +51,26 @@ export default function ProblemPage() {
     });
 
     const handleTitle = (all: Question) => navigate('/ParticularProblem', {state:{harsh: all}});
-    const handleContest = () => navigate('/ContestPage');
-    const handleProfile = () => navigate('/ProfilePage');
-    const home = () => navigate('/HomePage');
-    const handleCode = () => navigate('/HomePage');
-
-    const handleLeaderboard=()=>{
-        alert('leaderboard will be available soon');
-    }
+    
 
 
     return (
-        <div className="problems-page">
-            <header className="problem-header-form">        
-          <div className="header-left">
-    <span onClick={handleCode} className="header-item">CodeVerdict</span>
+        <>
+        <header className="headeraa">
+   <div className="header-left">
+    <span onClick={()=>navigate('/HomePage')}  className="header-item">CodeVerdict</span>
   </div>
     <div className="header-center">
-    <span onClick={home} className="header-item">Home</span>
-    <span className="header-item">Problems</span>
-    <span onClick={handleContest} className="header-item">Contest</span>
-    <span onClick={handleLeaderboard} className="header-item">Leaderboard</span>
+    <span onClick={()=>navigate('/HomePage')} className="header-item">Home</span>
+    <span onClick={()=>navigate('/ProblemPage')} className="header-item">Problems</span>
+    <span onClick={()=>navigate('/ContestPage')} className="header-item">Contest</span>
+    <span onClick={()=>alert('Leaderboard will be added soon')} className="header-item">Leaderboard</span>
   </div>
-
   <div className="header-right">
-    <span onClick={handleProfile} className="header-item">Profile</span>
+    <span onClick={()=>navigate('/ProfilePage')} className="header-item">Profile</span>
   </div>
      </header>
+        <div className="problems-page">
             <div className="problems-filters">
                 <input
                     type="text"
@@ -126,5 +119,6 @@ export default function ProblemPage() {
                 ))}
             </div>
         </div>
+    </>
     );
 }

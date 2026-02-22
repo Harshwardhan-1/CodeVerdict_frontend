@@ -5,6 +5,21 @@ export default function HomePage() {
   const navigate = useNavigate();
   return (
     <>
+    <header className="headera">
+   <div className="header-left">
+    <span onClick={()=>navigate('/HomePage')}  className="header-item">CodeVerdict</span>
+  </div>
+    <div className="header-center">
+    <span onClick={()=>navigate('/HomePage')} className="header-item">Home</span>
+    <span onClick={()=>navigate('/ProblemPage')} className="header-item">Problems</span>
+    <span onClick={()=>navigate('/ContestPage')} className="header-item">Contest</span>
+    <span onClick={()=>alert('Leaderboard will be added soon')} className="header-item">Leaderboard</span>
+  </div>
+
+  <div className="header-right">
+    <span onClick={()=>navigate('/ProfilePage')} className="header-item">Profile</span>
+  </div>
+     </header>
       <div className="home">
         <section className="hero">
           <h1 className="hero-title">
@@ -25,7 +40,7 @@ export default function HomePage() {
               onClick={()=> navigate("/ProblemPage")}
             initial={{x:100,opacity:0}}
             animate={{x:0,opacity:1}}
-            transition={{duration:1,ease:"easeInOut"}}
+            transition={{duration:1,ease:"easeIn"}}
             >Explore Problems</motion.button>
           </div>
         </section>
@@ -56,10 +71,10 @@ export default function HomePage() {
 
         <section className="features">
           <motion.div className="feature-card"
-          initial={{opacity:0,y:60}}
+          initial={{opacity:0,y:30}}
           whileInView={{opacity:1,y:0}}
           transition={{duration:0.8}}
-          viewport={{once:true}}
+          viewport={{once:true,amount:0.3}}
           >
             <h3>Structured Learning</h3>
             <p>
@@ -68,10 +83,10 @@ export default function HomePage() {
           </motion.div>
 
           <motion.div className="feature-card"
-          initial={{opacity:0,y:80}}
+          initial={{opacity:0,y:50}}
           whileInView={{opacity:1,y:0}}
           transition={{duration:0.8}}
-          viewport={{once:true}}
+          viewport={{once:true,amount:0.3}}
           >
             <h3>Interview Preparation</h3>
             <p>
@@ -80,10 +95,10 @@ export default function HomePage() {
           </motion.div>
 
           <motion.div className="feature-card"
-          initial={{opacity:0,y:97}}
+          initial={{opacity:0,y:60}}
           whileInView={{opacity:1,y:0}}
-          transition={{duration:0.8}} 
-          viewport={{once:true}}
+          transition={{duration:0.8,ease:"easeInOut"}} 
+          viewport={{once:true,amount:0.3}}
           >
             <h3>Compete & Improve</h3>
             <p>

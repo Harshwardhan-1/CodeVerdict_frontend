@@ -34,6 +34,16 @@
 }
 
 
+.pp-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.pp-title {
+  margin: 0;
+}
+
 .pp-solved-badge {
   background-color: #16a34a;
   color: white;
@@ -89,7 +99,7 @@
 
 
 .pp-run-btn {
-  background-color: #334155;
+    background-color: #16a34a;
   color: white;
   border: none;
   padding: 8px 18px;
@@ -100,7 +110,7 @@
 }
 
 .pp-run-btn:hover {
-  background-color: #475569;
+  background-color: #15803d;
 }
 
 .pp-submit-btn {
@@ -173,4 +183,85 @@
 
 .pp-difficulty-text.hard {
   color: #dc2626;   
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.headeraaaa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 40px;
+  color: white;
+  font-weight: 500;
+   background-color: #2c3e50;
+    background: #0f172a;
+    border-bottom: 2px solid #1e293b;
+}
+
+
+.header-left {
+  flex: 1;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  font-size: 16px;
+}
+
+
+.header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header-item {
+  cursor: pointer;
+}
+
+.header-item:hover {
+  color: #22C55E;
+}
+
+
+
+.pp-dis-btn{
+  margin-left: 4px;
+  margin-right: 4px;
+    background-color: #334155;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500; 
+}
+
+
+.pp-sol-btn{
+  margin-left: 4px;
+  margin-right: 4px;
+    background-color: #334155;
+  color: white;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500; 
 }

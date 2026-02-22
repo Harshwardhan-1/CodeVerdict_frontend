@@ -5,6 +5,7 @@ import "./ParticularProblem.css";
 import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { CodeEditor } from "./CodeEditor";
+import { motion } from "framer-motion";
 
 export default function ParticularProblem() {
 
@@ -57,10 +58,13 @@ using namespace std;
 IMPORTANT: 
 - Do NOT return the answer 
 - PRINT the answer using cout 
-void solve(){ 
+*/
+void solution(){ 
+
 }
- */
+
 int main() {
+   solution();
     return 0;
 }`,
     python: `def solve():
@@ -228,6 +232,9 @@ System.out.println()
   };
 
   const discussSolution = () => {
+    if(result?.message!=="all test case pass"){
+      return alert('first pass all the test cases');
+    }
     navigate("/DiscussPage", {
       state: { ram: { title: harsh?.title, language, userCode } }
     });
@@ -251,10 +258,36 @@ System.out.println()
 
   return (
     <>
-      
+      <motion.header className="headeraaaa"
+      >
+   <div className="header-left">
+    <span onClick={()=>navigate('/HomePage')}  className="header-item">CodeVerdict</span>
+  </div>
+    <div className="header-center">
+    <span onClick={()=>navigate('/HomePage')} className="header-item">Home</span>
+    <span onClick={()=>navigate('/ProblemPage')} className="header-item">Problems</span>
+    <span onClick={()=>navigate('/ContestPage')} className="header-item">Contest</span>
+    <span onClick={()=>alert('Leaderboard will be added soon')} className="header-item">Leaderboard</span>
+  </div>
+  <div className="header-right">
+    <span onClick={()=>navigate('/ProfilePage')} className="header-item">Profile</span>
+  </div>
+     </motion.header>
 
-    <div className="pp-main-container">
 
+
+
+
+
+
+
+
+
+    <motion.div className="pp-main-container"
+    initial={{y:100,opacity:0}}
+    animate={{y:0,opacity:1}}
+    transition={{duration:1,ease:"easeIn"}}
+    >
       <div className="pp-left">
         <p> Difficulty:{" "}
   <span className={`pp-difficulty-text ${harsh?.difficulty?.toLowerCase()}`}>{harsh?.difficulty}</span>
@@ -272,7 +305,7 @@ System.out.println()
         {!loading && !result && (
           input.map((key, index) => (
             <div key={index}>
-              <p>Example {index + 1}</p>
+              <p>Example:{index + 1}</p>
               <pre>{key.sampleInput}</pre>
               <p><b>Expected Output</b></p>
               <pre>{key.sampleOutput}</pre>
@@ -322,6 +355,8 @@ System.out.println()
           <div>
             <button onClick={handleRun} className="pp-run-btn">Run</button>
             <button onClick={handleSubmit} className="pp-submit-btn">Submit</button>
+            <button onClick={discussSolution} className="pp-dis-btn">Discuss </button>
+    <button onClick={handleSeeSolution} className="pp-sol-btn">ViewSol</button>
           </div>
         </div>
 
@@ -331,18 +366,10 @@ System.out.println()
           language={language}
         />
 
-        <div className="pp-buttons">
-          <button onClick={discussSolution} className="pp-submit-btn">
-            Discuss Solution
-          </button>
-
-          <button onClick={handleSeeSolution} className="pp-submit-btn">
-            View Accepted Solution
-          </button>
-        </div>
+       
 
       </div>
-    </div>
+    </motion.div>
     </>
   );
 }

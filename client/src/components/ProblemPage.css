@@ -16,46 +16,6 @@
   gap: 16px;
   flex-wrap: wrap;
 }
-.problem-header-form {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 15px 40px;
-
-  color: white;
-}
-
-/* LEFT SECTION */
-.header-left {
-  flex: 1;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-/* CENTER SECTION */
-.header-center {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  gap: 35px;
-  font-size: 16px;
-}
-
-/* RIGHT SECTION */
-.header-right {
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.header-item {
-  cursor: pointer;
-}
-
-.header-item:hover {
-  color: #22C55E;
-}
-
 
 .problems-filters {
   display: flex;
@@ -125,3 +85,60 @@ font-weight: 500;
 .difficulty.easy { color: #22C55E; }
 .difficulty.medium { color: #FACC15; }
 .difficulty.hard { color: #EF4444; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.headeraa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 40px;
+  color: white;
+  font-weight: 500;
+   background: linear-gradient(135deg, #1a202c, #2c3e50) !important;
+    border-bottom: 2px solid #1e293b;
+}
+
+
+.header-left {
+  flex: 1;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  font-size: 16px;
+}
+
+
+.header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header-item {
+  cursor: pointer;
+}
+
+.header-item:hover {
+  color: #22C55E;
+}

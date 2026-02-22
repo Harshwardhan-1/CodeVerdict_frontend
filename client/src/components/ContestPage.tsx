@@ -30,9 +30,24 @@ export default function ContestPage(){
     }
     return(
         <>
+        <header className="headare">
+   <div className="header-left">
+    <span onClick={()=>navigate('/HomePage')}  className="header-item">CodeVerdict</span>
+  </div>
+    <div className="header-center">
+    <span onClick={()=>navigate('/HomePage')} className="header-item">Home</span>
+    <span onClick={()=>navigate('/ProblemPage')} className="header-item">Problems</span>
+    <span onClick={()=>navigate('/ContestPage')} className="header-item">Contest</span>
+    <span onClick={()=>alert('Leaderboard will be added soon')} className="header-item">Leaderboard</span>
+  </div>
+
+  <div className="header-right">
+    <span onClick={()=>navigate('/ProfilePage')} className="header-item">Profile</span>
+  </div>
+     </header>
         <div className="contest-page-wrapper">
       <div className="contest-page">
-        <h1>Contest Page</h1>
+        <h1>Contests</h1>
         <button onClick={handleVerdictContest}>CodeVerdict Contest</button>
         <button onClick={handle}>Organize Your Own Contest</button>
         <button onClick={seeContest}>See All Your Contests</button>

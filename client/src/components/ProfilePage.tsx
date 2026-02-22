@@ -4,6 +4,7 @@ import "./ProfilePage.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import CalendarHeatMap from "react-calendar-heatmap";
+import { motion } from "framer-motion";
 
 
 interface Submission {
@@ -372,6 +373,20 @@ const handleEdit=async()=>{
 }
     return (
         <>
+        <header className="headeraaa">
+   <div className="header-left">
+    <span onClick={()=>navigate('/HomePage')}  className="header-item">CodeVerdict</span>
+  </div>
+    <div className="header-center">
+    <span onClick={()=>navigate('/HomePage')} className="header-item">Home</span>
+    <span onClick={()=>navigate('/ProblemPage')} className="header-item">Problems</span>
+    <span onClick={()=>navigate('/ContestPage')} className="header-item">Contest</span>
+    <span onClick={()=>alert('Leaderboard will be added soon')} className="header-item">Leaderboard</span>
+  </div>
+  <div className="header-right">
+    <span onClick={()=>navigate('/ProfilePage')} className="header-item">Profile</span>
+  </div>
+     </header>
         <div className="profile-layout">
             <aside className="sidebar">
                  <img src={preview ||"https://cdn-icons-png.flaticon.com/512/149/149071.png"}  className="avatar"/>
@@ -434,8 +449,7 @@ const handleEdit=async()=>{
 
 
 
-  <p>total active days:{activeDays?.totalactiveDays}</p>
-  <p>max streak:{maxstreak?.maxStreak}</p>
+
 
   {language.languageCplusplus>0 && (
     <p>C++:{language?.languageCplusplus}problem solved</p>
@@ -454,7 +468,7 @@ const handleEdit=async()=>{
             <div>
             </div>
         </div>
-
+{/* 
 <div className="heatmap-container"></div>
 <div className="year-controls" style={{ marginBottom: "15px" }}>
   <button onClick={()=>setYear(year - 1)}>Prev</button>
@@ -481,9 +495,48 @@ const handleEdit=async()=>{
     if (!v) return "No submissions";
     return `${v.count} submissions on ${v.date}`;
   }}
-/>
+/> */}
 
-{count}
+<motion.div className="heatmap-section"
+initial={{y:50,opacity:0}}
+whileInView={{y:0,opacity:1}}
+transition={{duration:0.8,ease:"easeOut"}}
+viewport={{once:true,amount:0.2}}
+>
+  <div className="heatmap-header">
+    <h3>{heatmap.reduce((sum, d) => sum + d.count, 0)} submissions this year</h3>
+    <div className="heatmap-stats">
+      <span>Total Active Days: {activeDays?.totalactiveDays}</span>
+      <span>Max Streak: {maxstreak?.maxStreak}</span>
+    </div>
+  </div>
+
+  <div className="year-controls">
+    <button onClick={()=>setYear(year - 1)}>Prev</button>
+    <span className="year-text">{year}</span>
+    <button onClick={()=>setYear(year + 1)}>Next</button>
+  </div>
+
+  <CalendarHeatMap
+    startDate={new Date(`${year}-01-01`)}
+    endDate={new Date(`${year}-12-31`)}
+    values={heatmap}
+    gutterSize={4}
+    classForValue={(v) => {
+      if (!v || v.count === 0) return "color-empty";
+      if (v.count >= 4) return "color-4";
+      if (v.count === 3) return "color-3";
+      if (v.count === 2) return "color-2";
+      return "color-1";
+    }}
+    titleForValue={(v) => {
+      if (!v) return "No submissions on this day";
+      return `${v.count} submission${v.count > 1 ? "s" : ""} on ${v.date}`;
+    }}
+  />
+</motion.div>
+
+{console.log(count)}
 
 {
     batchImage.map((all,index)=>(

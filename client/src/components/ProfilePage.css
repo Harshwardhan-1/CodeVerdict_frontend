@@ -235,3 +235,150 @@ div img {
     margin: 6px;
     object-fit: cover;
 }
+
+
+
+
+
+
+
+
+
+
+.headeraaa {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 40px;
+  color: white;
+  font-weight: 500;
+   background-color: #2c3e50;
+    background: #0f172a;
+    border-bottom: 2px solid #1e293b;
+}
+
+
+.header-left {
+  flex: 1;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  font-size: 16px;
+}
+
+
+.header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.header-item {
+  cursor: pointer;
+}
+
+.header-item:hover {
+  color: #22C55E;
+}
+
+
+
+
+
+.heatmap-section {
+  margin-top: 50px;
+  padding: 25px;
+  background: #12121b;
+  border-radius: 14px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.heatmap-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.heatmap-header h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.heatmap-stats {
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: white;
+}
+
+.year-controls {
+  margin: 15px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  color: white;
+}
+
+.year-controls button {
+  background: #4caf50;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 6px;
+  color: white;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.year-controls button:hover {
+  background: #66bb6a;
+}
+
+.year-text {
+  font-weight: bold;
+  color: white;
+  font-size: 15px;
+}
+
+
+.react-calendar-heatmap .react-calendar-heatmap-day {
+  rx: 4;
+  ry: 4;
+  stroke: #1c1c2e;
+  stroke-width: 1px;
+  transition: fill 0.25s ease;
+  cursor: pointer;
+}
+
+
+.color-empty { fill: #2a2a3d; } 
+.color-1 { fill: #4caf50; }  
+.color-2 { fill: #2e7d32; }   
+.color-3 { fill: #1b5e20; }   
+.color-4 { fill: #0d3b12; }  
+
+
+.react-calendar-heatmap-day:hover {
+  stroke: #ffffff;
+  stroke-width: 2px;
+}
+
+
+.react-calendar-heatmap text {
+  fill: white !important;
+}
