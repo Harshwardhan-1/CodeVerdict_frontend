@@ -1,5 +1,5 @@
 .problems-page {
-  padding: 40px 60px;
+  padding: 1% 60px;
   background: linear-gradient(135deg, #1a202c, #2c3e50);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   min-height: 98vh;
@@ -19,27 +19,37 @@
 .problem-header-form {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
+  justify-content: space-between;
+  padding: 15px 40px;
+
+  color: white;
 }
+
+/* LEFT SECTION */
+.header-left {
+  flex: 1;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+/* CENTER SECTION */
+.header-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  font-size: 16px;
+}
+
+/* RIGHT SECTION */
+.header-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
 .header-item {
-  margin-right: 0;
-  cursor: pointer;  
-}
-
-
-.problem-header-form span:nth-child(1) {
-  margin-right: auto;
-}
-
-.problem-header-form span:nth-child(2),
-.problem-header-form span:nth-child(3),
-.problem-header-form span:nth-child(4) {
-  margin: 0 15px;
-}
-
-
-.problem-header-form span:nth-child(5) {
-  margin-left: auto;
+  cursor: pointer;
 }
 
 .header-item:hover {

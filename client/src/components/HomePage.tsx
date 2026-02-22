@@ -30,13 +30,17 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="stats"
-
-        >
-          <div className="stat-card">
+        <section className="stats" >
+          <div className="stat-card"
+            
+          >
             <p>Solve daily problems</p>
+            <p>Consistency</p>
           </div>
-          <div className="stat-card">
+          
+          <div className="stat-card"
+          
+          >
             <h2>20+</h2>
             <p>Topics</p>
           </div>
@@ -51,26 +55,41 @@ export default function HomePage() {
         </section>
 
         <section className="features">
-          <div className="feature-card">
+          <motion.div className="feature-card"
+          initial={{opacity:0,y:60}}
+          whileInView={{opacity:1,y:0}}
+          transition={{duration:0.8}}
+          viewport={{once:true}}
+          >
             <h3>Structured Learning</h3>
             <p>
               Solve problems by topic and difficulty to build strong fundamentals.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="feature-card">
+          <motion.div className="feature-card"
+          initial={{opacity:0,y:80}}
+          whileInView={{opacity:1,y:0}}
+          transition={{duration:0.8}}
+          viewport={{once:true}}
+          >
             <h3>Interview Preparation</h3>
             <p>
               Curated problems asked by top tech companies.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="feature-card">
+          <motion.div className="feature-card"
+          initial={{opacity:0,y:97}}
+          whileInView={{opacity:1,y:0}}
+          transition={{duration:0.8}} 
+          viewport={{once:true}}
+          >
             <h3>Compete & Improve</h3>
             <p>
               Join contests and track your progress on the leaderboard.
             </p>
-          </div>
+          </motion.div>
         </section>
       </div>
     </>

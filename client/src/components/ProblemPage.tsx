@@ -56,17 +56,28 @@ export default function ProblemPage() {
     const home = () => navigate('/HomePage');
     const handleCode = () => navigate('/HomePage');
 
+    const handleLeaderboard=()=>{
+        alert('leaderboard will be available soon');
+    }
+
+
     return (
         <div className="problems-page">
-            <header className="problem-header-form">
-                
-                    <span onClick={handleCode} className="header-item">CodeVerdict</span>
-                    <span onClick={home} className="header-item">Home</span>
-                    <span className="header-item">Problems</span>
-                    <span onClick={handleContest} className="header-item">Contest</span>
-                    <span onClick={handleProfile} className="header-item">Profile</span>
-                
-            </header>
+            <header className="problem-header-form">        
+          <div className="header-left">
+    <span onClick={handleCode} className="header-item">CodeVerdict</span>
+  </div>
+    <div className="header-center">
+    <span onClick={home} className="header-item">Home</span>
+    <span className="header-item">Problems</span>
+    <span onClick={handleContest} className="header-item">Contest</span>
+    <span onClick={handleLeaderboard} className="header-item">Leaderboard</span>
+  </div>
+
+  <div className="header-right">
+    <span onClick={handleProfile} className="header-item">Profile</span>
+  </div>
+     </header>
             <div className="problems-filters">
                 <input
                     type="text"
