@@ -47,19 +47,19 @@ server/
 
 ##  Installation & Setup
 
-### 1️ Navigate to the server directory
+### 1️. Navigate to the server directory
 
 ```bash
 cd server
 ```
 
-### 2️ Install Dependencies
+### 2️. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 3️ Configure Environment Variables
+### 3️. Configure Environment Variables
 
 Create a `.env` file in the **root of the server directory**:
 
@@ -71,7 +71,7 @@ JWT_SECRET=your_secret_key
 
 Replace the values according to your setup.
 
-### 4️ Run the Server
+### 4️. Run the Server
 
 #### Development mode
 
