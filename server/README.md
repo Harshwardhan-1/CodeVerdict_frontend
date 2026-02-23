@@ -92,8 +92,7 @@ http://localhost:3000
 ```
 
 ---
-## 👨‍💻 Author
+## Author
 
 **Harshwardhan Yadav**  
 Full Stack Developer  
-Backend developed as part of the CodeVerdict full-stack project.

@@ -1,4 +1,4 @@
-#  Code Verdict – Frontend
+#  Code Verdict(leetcode-clone) – Frontend
 
 This is the frontend application of Code Verdict, a full-stack coding practice platform inspired by modern online judges.  
 It provides a clean, responsive, and interactive interface for solving problems and tracking progress.
@@ -121,5 +121,4 @@ The frontend is optimized for deployment on platforms like:
 
 ##  Author
 **Harshwardhan Yadav**
-Full Stac Devloper
-Frontend developed as part of the Code Verdict full-stack project.
+Full Stack Devloper

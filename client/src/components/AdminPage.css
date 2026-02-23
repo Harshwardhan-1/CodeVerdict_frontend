@@ -1,133 +1,176 @@
 .admin-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
+  background: linear-gradient(135deg, hsl(222.2 84% 4.9%) 0%, hsl(217.2 32.6% 12%) 50%, hsl(222.2 84% 4.9%) 100%);
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 40px 20px;
-  font-family: 'Segoe UI', sans-serif;
+  align-items: flex-start;
+  padding: 3rem 1.5rem;
 }
-
 .admin-container {
+  background: hsl(222.2 84% 6.5%);
+  border: 1px solid hsl(217.2 32.6% 17.5%);
+  border-radius: 1rem;
+  padding: 2.5rem;
   width: 100%;
-  max-width: 800px;
-  background: #1e293b;
-  padding: 35px;
-  border-radius: 16px;
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  max-width: 720px;
+  box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.5);
 }
-
 .admin-container h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: hsl(210 40% 98%);
   text-align: center;
-  color: #f8fafc;
-  margin-bottom: 25px;
-  font-size: 26px;
-  letter-spacing: 1px;
+  margin-bottom: 2rem;
+  letter-spacing: -0.025em;
+  position: relative;
+  padding-bottom: 1rem;
 }
-
+.admin-container h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, hsl(217.2 91.2% 59.8%), hsl(190 90% 50%));
+  border-radius: 999px;
+}
 .admin-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 1rem;
 }
-
-.admin-form input,
-.admin-form textarea,
+.admin-form input[type="text"],
 .admin-form select {
-  padding: 12px 14px;
-  border-radius: 8px;
-  border: 1px solid #334155;
-  background-color: #0f172a;
-  color: #f1f5f9;
-  font-size: 14px;
-  transition: 0.3s ease;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: hsl(222.2 84% 4.9%);
+  border: 1px solid hsl(217.2 32.6% 17.5%);
+  border-radius: 0.5rem;
+  color: hsl(210 40% 98%);
+  font-size: 0.875rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
   outline: none;
 }
-
-.admin-form input:focus,
-.admin-form textarea:focus,
+.admin-form input[type="text"]:focus,
 .admin-form select:focus {
-  border-color: #3b82f6;
-  box-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+  border-color: hsl(217.2 91.2% 59.8%);
+  box-shadow: 0 0 0 3px hsl(217.2 91.2% 59.8% / 0.15);
 }
-
+.admin-form input[type="text"]::placeholder {
+  color: hsl(215 20.2% 45%);
+}
+.admin-form select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  padding-right: 2.5rem;
+}
+.admin-form select option {
+  background: hsl(222.2 84% 4.9%);
+  color: hsl(210 40% 98%);
+}
+.admin-form textarea,
+.admin-textarea,
+.admin-textarea-medium,
 .admin-textarea-large {
-  min-height: 120px;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: hsl(222.2 84% 4.9%);
+  border: 1px solid hsl(217.2 32.6% 17.5%);
+  border-radius: 0.5rem;
+  color: hsl(210 40% 98%);
+  font-size: 0.875rem;
+  font-family: inherit;
   resize: vertical;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
-
-.admin-textarea-medium {
-  min-height: 80px;
-  resize: vertical;
-}
-
 .admin-textarea {
-  min-height: 60px;
-  resize: vertical;
+  min-height: 80px;
 }
-
+.admin-textarea-medium {
+  min-height: 100px;
+}
+.admin-textarea-large {
+  min-height: 140px;
+}
+.admin-form textarea:focus,
+.admin-textarea:focus,
+.admin-textarea-medium:focus,
+.admin-textarea-large:focus {
+  border-color: hsl(217.2 91.2% 59.8%);
+  box-shadow: 0 0 0 3px hsl(217.2 91.2% 59.8% / 0.15);
+}
+.admin-form textarea::placeholder {
+  color: hsl(215 20.2% 45%);
+}
 .admin-form button {
-  padding: 12px;
-  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
   border: none;
-  font-size: 14px;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: all 0.2s ease;
+  letter-spacing: 0.01em;
 }
-
-.admin-form button[type='submit'] {
-  background: #3b82f6;
-  color: white;
+.admin-form button[type="submit"] {
+  background: linear-gradient(135deg, hsl(217.2 91.2% 59.8%), hsl(190 90% 50%));
+  color: hsl(0 0% 100%);
+  box-shadow: 0 4px 14px hsl(217.2 91.2% 59.8% / 0.3);
 }
-
-.admin-form button[type='submit']:hover {
-  background: #2563eb;
-  transform: translateY(-2px);
+.admin-form button[type="submit"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px hsl(217.2 91.2% 59.8% / 0.4);
 }
-
-.admin-form button[type='button'] {
-  background: #64748b;
-  color: white;
+.admin-form button[type="button"] {
+  background: hsl(217.2 32.6% 17.5%);
+  color: hsl(210 40% 98%);
+  border: 1px solid hsl(217.2 32.6% 22%);
 }
-
-.admin-form button[type='button']:hover {
-  background: #475569;
-  transform: translateY(-2px);
+.admin-form button[type="button"]:hover {
+  background: hsl(217.2 32.6% 22%);
+  transform: translateY(-1px);
 }
-
+/* Navigation buttons */
 .admin-navigation {
-  margin-top: 30px;
   display: flex;
   justify-content: center;
-  gap: 20px;
+  gap: 1rem;
+  padding: 2rem 1.5rem 3rem;
   flex-wrap: wrap;
-  padding-bottom: 40px;
 }
-
 .admin-navigation button {
-  padding: 10px 18px;
-  border-radius: 8px;
-  border: none;
-  background: #0ea5e9;
-  color: white;
+  padding: 0.7rem 1.5rem;
+  background: hsl(222.2 84% 6.5%);
+  border: 1px solid hsl(217.2 32.6% 17.5%);
+  border-radius: 0.5rem;
+  color: hsl(210 40% 98%);
+  font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
-  transition: 0.3s ease;
+  transition: all 0.2s ease;
 }
-
 .admin-navigation button:hover {
-  background: #0284c7;
-  transform: translateY(-2px);
+  background: hsl(217.2 32.6% 17.5%);
+  border-color: hsl(217.2 91.2% 59.8%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .admin-container {
-    padding: 25px;
+    padding: 1.5rem;
   }
-
   .admin-navigation {
     flex-direction: column;
     align-items: center;
+  }
+  .admin-navigation button {
+    width: 100%;
+    max-width: 300px;
   }
 }

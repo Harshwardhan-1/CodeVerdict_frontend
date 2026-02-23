@@ -26,7 +26,7 @@
 
 
 
-### Running Code
+### Running
 ![Running](assets/screenshot/runningTestCase.png)
 
 ---
