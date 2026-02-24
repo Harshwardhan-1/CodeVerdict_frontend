@@ -6,7 +6,9 @@ A full-stack coding platform inspired by LeetCode that enables users to practice
 
 ## Demo Video
 
-(assets/video/demo.mp4)
+You can watch the complete working demonstration below:
+
+[Watch Demo Video](assets/video/demo.mp4)
 
 ##  Screenshots
 
