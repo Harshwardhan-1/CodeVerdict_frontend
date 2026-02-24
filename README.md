@@ -1,4 +1,4 @@
-#Leetcode-Clone
+## Leetcode-Clone
 A full-stack coding platform inspired by LeetCode that enables users to practice data structures and algorithms problems in an interactive environment. The application provides problem browsing, code editing, execution, and result evaluation within a modern web interface.
 
 ## Live Demo :
@@ -6,7 +6,7 @@ A full-stack coding platform inspired by LeetCode that enables users to practice
 
 ## Demo Video
 
-[![Watch Demo Video](assets/videoThumb.png)](assets/video/demo.mp4)
+![Watch Demo Video](assets/video/demo.mp4)
 
 ##  Screenshots
 
