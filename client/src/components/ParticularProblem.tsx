@@ -213,7 +213,15 @@ System.out.println()
 
   const handleSubmit = async () => {
     if (result?.message !== "all test case pass") {
-      alert("First pass all test cases");
+      Swal.fire({
+        icon:"error",
+        title:"Pass All Test Case",
+        text:"First Pass All Test Case Then You Will Able To Submit It",
+         timer: 2000,
+  showConfirmButton: false,
+  background: "#0b1b2b",
+  color: "#e2e8f0",
+      })
       return;
     }
 
@@ -287,8 +295,15 @@ useEffect(()=>{
       state: { ram: { title: harsh?.title, language, userCode } }
     });
   }
-
-  alert("first pass all the test cases");
+Swal.fire({
+        icon:"error",
+        title:"Pass All Test Case",
+        text:"First Pass All Test Case Then You Will Able To Discuss Your Solution",
+         timer: 2000,
+  showConfirmButton: false,
+  background: "#0b1b2b",
+  color: "#e2e8f0",
+      })
 };
 
   const handleSeeSolution = async () => {
@@ -303,7 +318,14 @@ useEffect(()=>{
         navigate("/SeeSolution", { state: { ra: response.data.data } });
       }
     } catch(err){
-    console.log(err);
+    const error=err as AxiosError<{message:string}>
+    if(error.response?.data.message=== 'no one has discuss the solution yet'){
+      Swal.fire({
+        icon:"question",
+        title:"Not Found",
+        text:"No Solution To View No One Discuss Yet",
+      })
+    }
     }
   };
   return (

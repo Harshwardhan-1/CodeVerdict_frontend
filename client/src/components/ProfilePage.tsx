@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import CalendarHeatMap from "react-calendar-heatmap";
 import { motion } from "framer-motion";
 import Swal from "sweetalert2";
+import { useRef } from "react";
 
 
 interface Submission {
@@ -49,6 +50,12 @@ interface HeatmapData{
 
 
 export default function ProfilePage() {
+    const submissionRef=useRef<HTMLDivElement>(null);
+    const pointsRef=useRef<HTMLDivElement>(null);
+    const discussionRef=useRef<HTMLDivElement>(null);
+
+
+
     const currentYear = new Date().getFullYear();
 const [year, setYear] = useState(currentYear);
 
@@ -299,6 +306,9 @@ useEffect(()=>{
             setActiveSection("submission");
             const response = await axios.get("http://localhost:5000/api/submit/allSubmission",{ withCredentials: true });
             setData(response.data.data);
+            setTimeout(()=>{
+                submissionRef.current?.scrollIntoView({behavior:"smooth"});
+            },100)
         } catch (err) {
             const error = err as AxiosError<{ message: string }>;
             alert(error.response?.data?.message || "Error");
@@ -306,6 +316,8 @@ useEffect(()=>{
             setLoading(false);
         }
     };
+
+    
 
     const handlePoints = async () => {
         try {
@@ -317,8 +329,12 @@ useEffect(()=>{
 
             const total = pointsData.reduce(  (sum, item) => sum + Number(item.points), 0);
             setTotalPoints(total);
+            setTimeout(()=>{
+                pointsRef.current?.scrollIntoView({behavior:"smooth"});
+            },100);
         } catch (err) {
             console.log(err);
+            
         } finally {
             setLoading(false);
         }
@@ -334,11 +350,22 @@ useEffect(()=>{
                 const response=await axios.get('http://localhost:5000/api/discuss/allDiscussions',{withCredentials:true});
                 if(response.data.message=== 'successfully got'){
                     setDiscussion(response.data.data);
+                    setTimeout(()=>{
+                        discussionRef.current?.scrollIntoView({behavior:"smooth"});
+                    },100);
                 }
             }catch(err){
                 const error=err as AxiosError<{message:string}>
                 if(error.response?.data?.message=== 'no submission yet'){
-                    alert('no submission yet');
+                    Swal.fire({
+                        icon:"info",
+                        title:"Discussion",
+                        text:"No Discussion found",
+                        timer:1000,
+                        showConfirmButton: false,
+                        background: "#0b1b2b",
+                        color: "#e2e8f0",
+                    })
                 }
             }finally{
                 setLoading(false);
@@ -372,6 +399,7 @@ const logout=async(e:React.MouseEvent<HTMLButtonElement>)=>{
 const handleEdit=async()=>{
     navigate('/EditProfile');
 }
+
     return (
         <>
         <header className="headeraaa">
@@ -382,6 +410,9 @@ const handleEdit=async()=>{
     <span onClick={()=>navigate('/HomePage')} className="header-item">Home</span>
     <span onClick={()=>navigate('/ProblemPage')} className="header-item">Problems</span>
     <span onClick={()=>navigate('/ContestPage')} className="header-item">Contest</span>
+
+
+
     <span onClick={()=>Swal.fire({
            icon: "info",
         title: "Leaderboard",
@@ -391,6 +422,8 @@ const handleEdit=async()=>{
         background: "#0b1b2b",
         color: "#e2e8f0",
         })} className="header-item">Leaderboard</span>
+
+
   </div>
   <div className="header-right">
     <span onClick={()=>navigate('/ProfilePage')} className="header-item">Profile</span>
@@ -413,7 +446,7 @@ const handleEdit=async()=>{
 
              <main className="content">
                 
-                {loading && <p className="loading">Loading...</p>}
+                {/* {loading && <p className="loading">Loading...</p>} */}
                 {profileData && (
 <div className="leetcode-stats">
 
@@ -525,8 +558,10 @@ viewport={{once:true,amount:0.2}}
         </div>
     ))
 }
+
  {activeSection === "points" && !loading && (
                     <>
+                    <div ref={pointsRef}>
                         <div className="points-box">
                             Total Points: <span>{totalPoints}</span>
                         </div>
@@ -536,13 +571,15 @@ viewport={{once:true,amount:0.2}}
                                 <p><strong>Question:</strong> {item.title}</p>
                                 <p><strong>Points:</strong> {item.points}</p>
                             </div>
-                        ))}
-                    </>
+                        ))}   
+              </div>
+                </>
                 )}
 
 
                 {activeSection === "discussion" && !loading && (
                     <>
+                    <div ref={discussionRef} >
                         <h2>My Discussion</h2>
                         {discussion.map((item, index) => (
                             <div className="card" key={index}>
@@ -551,22 +588,27 @@ viewport={{once:true,amount:0.2}}
                                 <p>{item.approach}</p>
                             </div>
                         ))}
+                        </div>
                     </>
                 )}
+
+
+
                 {activeSection === "submission" && !loading && (
                     <>
-                        <h2>My Submissions</h2>
+                    <div ref={submissionRef} >
+                        <h2>All Submissions</h2>
                         {data.map((item, index) => (
                             <div className="card" key={index}>
-                                <h3>{item.title}</h3>
-                                <p>{item.description}</p>
+                                <h3>Title:{item.title}</h3>
+                                <p>Description:{item.description}</p>
                                 <pre>{item.userCode}</pre>
                                 <button onClick={()=>handleAllSubmission(item?.title)} className="submit-btn">See All Submission of this question</button>
                             </div>
                         ))}
+                        </div>
                     </>
                 )}
-
 </>
     );
 }
