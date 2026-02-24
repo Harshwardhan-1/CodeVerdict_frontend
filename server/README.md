@@ -108,12 +108,12 @@ http://localhost:3000
 
 ## Best Practices
 
-- **Centralized error handling**  
-- **Use async/await** for asynchronous operations  
-- **JWT-based authentication middleware**  
-- **Follow MVC architecture**  
-- **Design APIs following RESTful principles**  
-- **Environment-based configuration** for flexibility
+- Centralized error handling  
+- Use async/await for asynchronous operations  
+- JWT-based authentication middleware  
+- Follow MVC architecture 
+- Design APIs following RESTful principles  
+- Environment-based configuration** for flexibility
 
 ---
 
