@@ -101,7 +101,7 @@ http://localhost:3000
 | Variable     | Description                          |
 | ------------ | ------------------------------------ |
 | PORT         | Server port number                    |
-| MONGO_URI    | MongoDB connection string             |
+| MONGO_URL    | MongoDB connection string             |
 | JWT_SECRET   | Secret key used for JWT authentication |
 
 ---
