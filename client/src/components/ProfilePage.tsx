@@ -615,9 +615,9 @@ viewport={{once:true,amount:0.2}}
                         <h2>My Discussion</h2>
                         {discussion.map((item, index) => (
                             <div className="card" key={index}>
-                                <h3>{item.problemTitle}</h3>
+                                <h3>Title:{item.problemTitle}</h3>
                                 <pre>{item.userCode}</pre>
-                                <p>{item.approach}</p>
+                                <p>Approach:{item.approach}</p>
                             </div>
                         ))}
                         </div>

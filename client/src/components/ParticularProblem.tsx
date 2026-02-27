@@ -376,6 +376,11 @@ Swal.fire({
          Swal.fire({
         icon: "success",
         title: `Time Complexity: ${data.time}`,
+        html: `
+          <p><strong>Space Complexity:</strong> ${data.space}</p>
+          <p><strong>Explanation:</strong> ${data.explanation}</p>
+          <p><strong>Optimization Hint:</strong> ${data.optimize}</p>
+        `,
     background: "#0b1b2b",
     color: "#e2e8f0",
       }).then(()=>{
@@ -501,7 +506,7 @@ Swal.fire({
         )}
 
         {analyze?(
-          <button onClick={analyzeComp} className="analyze">Analyze Complexity</button>
+          <button onClick={analyzeComp} className="analyze-btn">Analyze Complexity</button>
         ):
         (result && !loading && !analyze && (
           <div className="pp-output-box">

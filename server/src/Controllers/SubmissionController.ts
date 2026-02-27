@@ -514,8 +514,10 @@ JSON Format:
 {
   "time": "O(...)",
   "space": "O(...)",
-  "explanation": "short explanation of 1 to 2 line",
-  "optimize":"provide optimzed approach hint of 1 to 2 line",}`;
+  "explanation": "Provide a clear 1-2 line explanation of why the time and space complexities are such, mentioning loops, recursion, or data structures used.",
+  "optimize":"If possible, suggest a 1-2 line hint to optimize the code. If it is already most optimized, write: 'This is the most optimized solution",
+  }`;
+
   try {
     const completion = await groq.chat.completions.create({
       model: "openai/gpt-oss-120b",
