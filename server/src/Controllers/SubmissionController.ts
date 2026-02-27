@@ -3,6 +3,8 @@ import { submitModel } from '../models/SubmissionModel';
 import { addQuestionModel } from '../models/AddQuestionModel';
 import { activeDaysModel } from '../models/ActiveDaysModel';
 import { batchModel } from '../models/BatchModel';
+import Groq from "groq-sdk";
+
 
 export const allSubmission=async(req:Request,res:Response)=>{
     const user=(req as any).user;
@@ -467,3 +469,70 @@ export const checkLanguage=async(req:Request,res:Response)=>{
         }
     });
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const analyzeComplexityOfCode=async(req:Request,res:Response)=>{
+    const {userCode,language}=req.body;
+    if(!userCode || !language){
+        return res.status(400).json({
+            message:"provide proper detail",
+        });
+    }
+    const groq=new Groq({
+        apiKey:process.env.GROQ_API_KEY!,
+    });
+
+    const prompt = `
+You are a competitive programming expert.
+Analyze the following ${language} code for worst-case complexity.
+
+Rules:
+- Return ONLY asymptotic complexity (Big-O)
+- Include Time Complexity and Space Complexity
+- Use simple JSON format
+
+Code:
+${userCode}
+
+JSON Format:
+{
+  "time": "O(...)",
+  "space": "O(...)",
+  "explanation": "short explanation of 1 to 2 line",
+  "optimize":"provide optimzed approach hint of 1 to 2 line",}`;
+  try {
+    const completion = await groq.chat.completions.create({
+      model: "openai/gpt-oss-120b",
+      messages: [{ role: "user", content: prompt }],
+      temperature: 0,
+    });
+
+    const analysis = JSON.parse(completion.choices[0].message.content!);
+
+    return res.status(200).json({
+      message: "Complexity analyzed successfully",
+      data: analysis,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      message: "Error analyzing complexity",
+    });
+  }
+};

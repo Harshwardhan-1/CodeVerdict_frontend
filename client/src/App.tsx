@@ -33,7 +33,7 @@ function App() {
       <Route path='/SignInPage' element={<SignInPage />}></Route>
       <Route path='/AdminPage' element={<AdminPage />}></Route>
       <Route path='/ProblemPage' element={<ProblemPage />}></Route>
-      <Route path='/ParticularProblem' element={<ParticularProblem />}></Route>
+      <Route path='/ParticularProblem/:randomNum' element={<ParticularProblem />}></Route>
       <Route path='/AllSubmission' element={<AllSubmission />}></Route>
       <Route path='/AllPoints' element={<AllPoints />}></Route>
       <Route path='/ContestPage' element={<ContestPage />}></Route>

@@ -15,6 +15,8 @@ interface Question{
     topic: string;
     successRate?: number;
 }
+const getRandom=()=>{
+        return Math.floor(Math.random()*10000000000000)};
 
 export default function ProblemPage() {
     const navigate = useNavigate();
@@ -51,8 +53,12 @@ export default function ProblemPage() {
         return matchedSearch && matchedDiff && matchedTopic;
     });
 
-    const handleTitle = (all: Question,index:number) => navigate('/ParticularProblem', {state:{harsh: all,serial:index+1}});
     
+    const handleTitle = 
+    (all: Question,index:number) =>{
+     const randomNum=getRandom();
+     navigate(`/ParticularProblem/${randomNum}`, {state:{harsh: all,serial:index+1}});
+    }
 
 
     return (
