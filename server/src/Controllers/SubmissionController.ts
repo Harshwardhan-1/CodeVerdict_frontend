@@ -514,8 +514,7 @@ JSON Format:
 {
   "time": "O(...)",
   "space": "O(...)",
-  "explanation": "Provide a clear 1-2 line explanation of why the time and space complexities are such, mentioning loops, recursion, or data structures used.",
-  "optimize":"If possible, suggest a 1-2 line hint to optimize the code. If it is already most optimized, write: 'This is the most optimized solution",
+  "explanation": "Provide a clear 1-2 line explanation of the time complexity based on the logic, loops, or recursion used in the code.",
   }`;
 
   try {
@@ -528,7 +527,7 @@ JSON Format:
     const analysis = JSON.parse(completion.choices[0].message.content!);
 
     return res.status(200).json({
-      message: "Complexity analyzed successfully",
+      message: "Time Complexity analyzed successfully",
       data: analysis,
     });
   } catch (err) {
@@ -538,3 +537,61 @@ JSON Format:
     });
   }
 };
+
+
+
+
+
+
+
+
+
+
+export const analyzeSpaceComplexityOfCode=async(req:Request,res:Response)=>{
+    const {userCode,language}=req.body;
+    if(!userCode || !language){
+        return res.status(400).json({
+            message:"provide proper detail",
+        });
+    }
+    const groq=new Groq({
+       apiKey:process.env.GROQ_API_KEY!,
+    });
+      const prompt = `
+You are a competitive programming expert.
+Analyze the following ${language} code for worst-case complexity.
+
+Rules:
+- Return ONLY asymptotic complexity (Big-O)
+- Include Time Complexity and Space Complexity
+- Use simple JSON format
+
+Code:
+${userCode}
+
+JSON Format:
+{
+  "space": "O(...)",
+"Provide a clear 1-2 line explanation of the space complexity based on loops, recursion, or data structures used in the code."
+  }`;
+
+  try {
+    const completion = await groq.chat.completions.create({
+      model: "openai/gpt-oss-120b",
+      messages: [{ role: "user", content: prompt }],
+      temperature: 0,
+    });
+
+    const analysis = JSON.parse(completion.choices[0].message.content!);
+
+    return res.status(200).json({
+      message: "Space Complexity analyzed successfully",
+      data: analysis,
+    });
+  } catch (err) {
+    console.error(err);
+    return res.status(500).json({
+      message: "Error analyzing complexity",
+    });
+  }
+}

@@ -3,7 +3,7 @@ const addQuestionRoutes=Router();
 import verifyToken from '../middleware/verifyToken';
 import verifyAdmin from '../middleware/verifyAdmin';
 import verifyStudent from '../middleware/verifyStudent';
-import { allQuestion,addQuestion,getAllQuestion,selectedQuestion,getAllAdminQuestion,deleteQuestion,updateQuestion,getQuestionCount,getSampleInput } from '../Controllers/AddQuestionController';
+import { allQuestion,addQuestion,getAllQuestion,selectedQuestion,getAllAdminQuestion,deleteQuestion,updateQuestion,getQuestionCount,getSampleInput,getQuestionCounts } from '../Controllers/AddQuestionController';
 
 
 addQuestionRoutes.get('/seeAllQuestion',verifyToken,getAllQuestion)
@@ -15,4 +15,5 @@ addQuestionRoutes.post('/deleteQuestion',verifyToken,verifyAdmin,deleteQuestion)
 addQuestionRoutes.post('/updateQuestion',verifyToken,verifyAdmin,updateQuestion);
 addQuestionRoutes.get('/getQuestionCount',verifyToken,verifyStudent,getQuestionCount);
 addQuestionRoutes.post('/getSampleInput',verifyToken,verifyStudent,getSampleInput);
+addQuestionRoutes.get('/getQuestionCounts',verifyToken,verifyStudent,getQuestionCounts);
 export default addQuestionRoutes;

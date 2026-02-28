@@ -1,11 +1,9 @@
-/* ContestPage.css - Dark compact theme following signup page style */
-
 .contest-page-wrapper {
-  min-height: 98vh;
+  min-height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(135deg, #0f2027, #203a43); /* same dark gradient */
+  background: linear-gradient(135deg, #0f2027, #203a43); 
   padding: 20px;
   box-sizing: border-box;
 }
@@ -14,7 +12,7 @@
   max-width: 400px;
   width: 90%;
   padding: 36px;
-  background-color: #2C3E50; /* dark card background */
+  background-color: #2C3E50; 
   border-radius: 14px;
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.55);
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -35,7 +33,7 @@
 .contest-page button {
   width: 100%;
   padding: 14px;
-  background-color: #1A5276; /* modern blue like signup page */
+  background-color: #1A5276; 
   color: #FDFEFE;
   border: none;
   border-radius: 8px;
@@ -46,7 +44,7 @@
 }
 
 .contest-page button:hover {
-  background-color: #2874A6; /* hover effect */
+  background-color: #2874A6; 
 }
 
 .contest-page button:active {

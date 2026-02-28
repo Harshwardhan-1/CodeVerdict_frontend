@@ -8,18 +8,18 @@
 
 .home .hero {
   text-align: center;
-  margin-top: 80px;
+  margin-top: 10px;
   margin-bottom: 100px;
 }
 
 .home .hero-title {
-  font-size: 54px;
-  font-weight: 800;
+  font-size: 42px;
+  font-weight: 600;
   margin-bottom: 20px;
 }
 
 .home .hero-subtitle {
-  font-size: 18px;
+  font-size: 16px;
   color: #94a3b8;
   max-width: 650px;
   margin: auto;
@@ -34,47 +34,47 @@
 }
 
 .home .primary-btn {
-  background: #22c55e;
+  background:  #34435E;
   border: none;
+  color: white;
   padding: 14px 32px;
   border-radius: 10px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
   transition: 0.25s;
 }
 
 .home .primary-btn:hover {
-  box-shadow: 0 8px 20px rgba(34, 197, 94, 0.4);
+   background-color:  #132E32;
 }
 
 .home .secondary-btn {
-  background: transparent;
-  border: 2px solid #22c55e;
-  color: #22c55e;
+    background:  #34435E;
+  border: none;
+  color: white;
   padding: 14px 32px;
-  font-weight: 600;
   border-radius: 10px;
+  font-weight: 500;
   cursor: pointer;
   transition: 0.25s;
 }
 
 .home .secondary-btn:hover {
-  background: #22c55e;
-  color: black;
+      background-color:  #132E32;
 }
 
 .home .stats {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(208px, 1fr));
   gap: 25px;
-  max-width: 900px;
+  max-width: 1100px;
   margin: auto;
   margin-bottom: 110px;
 }
 
 .home .stat-card {
-  background: #1e293b;
-  padding: 35px;
+  background: #34435E;
+  padding: 10px;
   border-radius: 14px;
   text-align: center;
   transition: 0.25s;
@@ -129,7 +129,6 @@
 
 
 
-
 .headera {
   display: flex;
   align-items: center;
@@ -171,4 +170,40 @@
 
 .header-item:hover {
   color: #22C55E;
+}
+
+
+
+
+
+.laset {
+  text-align: center;
+background-color:  #1e293b;
+  padding: 70px 10px; 
+  border-radius: 16px;
+  margin: 90px auto;
+  max-width: 1100px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px; 
+}
+
+.laset h1 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.hr {
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  background:  #34435E;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  transition: 0.25s;
 }

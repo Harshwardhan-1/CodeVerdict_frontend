@@ -242,3 +242,26 @@ if(findIt){
         }
     })
 }
+
+
+
+
+
+
+export const getQuestionCounts=async(req:Request,res:Response)=>{
+    const user=(req as any).user;
+    const name=user.name;
+    const gmail=user.gmail;
+    const checkIt=await addQuestionModel.find();
+    if(checkIt.length===0){
+        return res.status(400).json({
+            message:"no question found",
+        });
+    }
+    return res.status(200).json({
+        message:"successfull",
+        data:{
+            count:checkIt.length,
+        }
+    })
+}

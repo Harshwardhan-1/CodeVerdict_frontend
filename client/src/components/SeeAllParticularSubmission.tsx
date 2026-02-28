@@ -69,7 +69,7 @@ export default function SeeAllParticularSubmission(){
         {
             data.map((all,index)=>(
                 <div className="submission-card" key={index}>
-                    <p>Title{all?.title}</p>
+                    <p>Title:{all?.title}</p>
                     <p>Description:{all?.description}</p>
                     <pre>{all?.userCode}</pre>
                     <p>Submitted On:{new Date(all?.createdAt).toLocaleDateString()}</p>
