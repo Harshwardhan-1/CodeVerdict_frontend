@@ -3,32 +3,14 @@ import { useState } from "react";
 import axios from "axios";
 import { AxiosError } from "axios";
 import { useEffect } from "react";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 import './DiscussPage.css';
 export default function DiscussPage(){
+    const navigate=useNavigate();
     const location=useLocation();
     const harsh=location.state?.ram;
     const [approach,setApproach]=useState<string>('');
-    
-  //  const send={title:harsh?.title};
-// useEffect(()=>{
-//     const fetch=async()=>{
-//         try{
-//             const response=await axios.post('http://localhost:5000/api/discuss/getDiscussion',send,{withCredentials:true});
-//             if(response.data.message=== 'successfull'){
-//                 setApproach(response.data.data.approach);
-//             }
-//         }catch(err){
-//             const error=err as AxiosError<{message:string}>
-//             if(error){
-//                 console.log(error);
-//             }
-//         }
-//     };
-//     fetch();
-// },);
-
-
-
 useEffect(()=>{
     if(!harsh?.title)return;
     const sendUseEff={title:harsh?.title};
@@ -60,7 +42,14 @@ const send={title:harsh?.title,userCode:harsh?.userCode,approach};
 try{
     const response=await axios.post('http://localhost:5000/api/discuss/addDiscuss',send,{withCredentials:true});
     if(response.data.message=== 'successfully submitted'){
-        alert('successfully submitted thanks for discussion');
+        Swal.fire({
+            icon:"success",
+            title:"successfully Submitted",
+            text:"successfully submitted thanks for discussion",
+            timer: 1000,
+        background: "#0b1b2b",
+        color: "#e2e8f0",
+        })
     }
 }catch(err){
     const error=err as AxiosError<{message:string}>
@@ -78,6 +67,29 @@ try{
 
     return(
         <>
+         <header className="headera">
+           <div className="header-left">
+            <span onClick={()=>navigate('/HomePage')}  className="header-item">CodeVerdict</span>
+          </div>
+            <div className="header-center">
+            <span onClick={()=>navigate('/HomePage')} className="header-item">Home</span>
+            <span onClick={()=>navigate('/ProblemPage')} className="header-item">Problems</span>
+            <span onClick={()=>navigate('/ContestPage')} className="header-item">Contest</span>
+            <span onClick={()=>Swal.fire({
+                   icon: "info",
+                title: "Leaderboard",
+                text: "Leaderboard will be added soon",
+                timer: 1000,
+                showConfirmButton: false,
+                background: "#0b1b2b",
+                color: "#e2e8f0",
+                })} className="header-item">Leaderboard</span>
+          </div>
+        
+          <div className="header-right">
+            <span onClick={()=>navigate('/ProfilePage')} className="header-item">Profile</span>
+          </div>
+             </header>
            <div className="discuss-container">
       <div className="code-section">
         <h2>{harsh?.title}</h2>
