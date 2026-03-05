@@ -56,7 +56,7 @@ export default function ParticularProblem() {
   const boilerplates: Record<string, string> = {
     cpp: `
 #include <iostream>
-using namespace std;
+using namespace std;   
 /*
  Write your solution here 
 IMPORTANT: 
