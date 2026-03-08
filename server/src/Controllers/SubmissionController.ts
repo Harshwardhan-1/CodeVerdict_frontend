@@ -574,7 +574,7 @@ JSON Format:
   "space": "O(...)",
 "Provide a clear 1-2 line explanation of the space complexity based on loops, recursion, or data structures used in the code."
   }`;
-
+        
   try {
     const completion = await groq.chat.completions.create({
       model: "openai/gpt-oss-120b",
