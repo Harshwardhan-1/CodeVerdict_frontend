@@ -378,7 +378,7 @@ Swal.fire({
         title: `Time Complexity ${data.time}`,
         text:`Explanation:${data.explanation}`,
     background: "#0b1b2b",
-    color: "#e2e8f0",
+    color: "#e2e8f0",        
       }).then(()=>{
         setIsblurred(false);
       })
