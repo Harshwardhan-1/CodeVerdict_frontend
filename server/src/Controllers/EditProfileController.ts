@@ -38,7 +38,7 @@ const createIt=await profileModel.create({
     gmail,
     gender,
     profilePhoto,
-    dateOfBirth,    
+    dateOfBirth,         
     githubLink,
     linkedinLink,
 });
